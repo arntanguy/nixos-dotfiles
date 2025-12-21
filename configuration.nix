@@ -42,7 +42,7 @@
     };
   };
 
-  time.timeZone = "America/Lima";
+  time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.xserver.xkb = {
@@ -70,8 +70,8 @@
     krita
     ffmpeg
     jq
-		ripgrep
-		fzf
+    ripgrep
+    fzf
     fastfetch
     btop
     starship
@@ -174,6 +174,7 @@
     niri.enable = true;
     xwayland.enable = true;
     wireshark.enable = true;
+	firefox.enable = true;
 
     steam = {
       enable = true;
