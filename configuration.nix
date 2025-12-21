@@ -102,7 +102,7 @@
     fzf
     lazygit
     lazydocker
-    wofi
+    fuzzel
     ghostty
     vscode
     adw-gtk3

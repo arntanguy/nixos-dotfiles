@@ -12,7 +12,7 @@
     ./waybar/waybar.nix
     ./niri/niri.nix
     ./bash.nix
-    ./wofi.nix
+    ./fuzzel/fuzzel.nix
     ./tmux.nix
     ./nvim.nix
     ./ghostty.nix
