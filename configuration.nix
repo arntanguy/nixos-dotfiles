@@ -146,6 +146,7 @@
     grub2
     xwayland
     xwayland-satellite
+	bzmenu
   ];
 
   hardware = {
@@ -154,6 +155,7 @@
       modesetting.enable = true;
       open = false;
     };
+    bluetooth.enable = true;
   };
   services.xserver.videoDrivers = [ "nvidia" ];
 
@@ -167,6 +169,7 @@
   services = {
     displayManager.enable = true;
     displayManager.ly.enable = true;
+    blueman.enable = true;
     # services.openssh.enable = true;
   };
   programs = {
