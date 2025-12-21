@@ -2,9 +2,16 @@
   description = "S13L custom NixOS + Home Manager config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    home-manager = {
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixCats = {
+      # url = "github:BirdeeHub/nixCats-nvim?dir=templates/example";
+      url = "github:arntanguy/nvim-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -12,8 +19,9 @@
       self,
       nixpkgs,
       home-manager,
+      nixCats,
       ...
-    }:
+    }@inputs:
     let
       system = "x86_64-linux";
       globals = {
@@ -29,7 +37,7 @@
     {
       nixosConfigurations.${globals.HostName} = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit globals; };
+        specialArgs = { inherit globals; inherit inputs; };
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager

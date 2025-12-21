@@ -2,6 +2,7 @@
   config,
   pkgs,
   globals,
+  inputs,
   ...
 }:
 
@@ -85,6 +86,7 @@
     nvidia-modprobe
     swaynotificationcenter
     neovim
+    inputs.nixCats.packages."${pkgs.system}".nixCats
     wget
     davinci-resolve
     wl-clipboard-rs
