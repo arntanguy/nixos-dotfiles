@@ -65,6 +65,7 @@
     ];
   };
 
+  # See modules/home/nvidia.nix for programs requiring nvidia to run (davinci-resolve, blender, darktable, etc)
   environment.systemPackages = with pkgs; [
     gimp
     godot
@@ -88,7 +89,6 @@
     neovim
     inputs.nixCats.packages."${pkgs.system}".nixCats
     wget
-    davinci-resolve
     wl-clipboard-rs
     git
     glib

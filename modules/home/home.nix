@@ -18,6 +18,7 @@
     ./ghostty.nix
     ./git.nix
     ./scripts/scripts.nix
+    ./nvidia.nix
   ];
 
   dconf.settings = {
