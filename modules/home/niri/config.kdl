@@ -40,7 +40,7 @@ input {
     }
     // warp-mouse-to-focus
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="0%"
 }
 output "HDMI-A-1" {
     mode "1920x1080@72"
@@ -190,42 +190,47 @@ window-rule {
     tiled-state true
 }
 
-workspace "1"
-workspace "brow"
-workspace "term"
-workspace "4"
-workspace "5"
-workspace "6"
-workspace "7"
-workspace "obs"
-workspace "oss"
+// workspace "1"
+// workspace "2-brow"
+// workspace "3"
+// workspace "4"
+// workspace "5"
+// workspace "6"
+// workspace "7"
+// workspace "8-obs"
+// workspace "9-oss"
 
-window-rule {
-    match app-id=r#"obs"#
-    open-on-workspace "obs"
-}
-window-rule {
-    match app-id=r#"steam"#
-    open-on-workspace "oss"
-}
-window-rule {
-    match app-id=r#"^Spotify$"#
-    open-on-workspace "oss"
-}
-window-rule {
-    match app-id=r#"^discord$"#
-    open-on-workspace "oss"
-}
-window-rule {
-    match app-id=r#"chromium"#
-    open-maximized true
-    open-on-workspace "brow"
-}
-window-rule {
-    match app-id=r#"ghostty"#
-    open-maximized true
-    open-on-workspace "term"
-}
+// window-rule {
+//     match app-id=r#"obs"#
+//     open-on-workspace "8-obs"
+// }
+// window-rule {
+//     match app-id=r#"steam"#
+//     open-on-workspace "9-oss"
+// }
+// window-rule {
+//     match app-id=r#"^Spotify$"#
+//     open-on-workspace "9-oss"
+// }
+// window-rule {
+//     match app-id=r#"^discord$"#
+//     open-on-workspace "9-oss"
+// }
+// window-rule {
+//     match app-id=r#"chromium"#
+//     open-maximized true
+//     open-on-workspace "2-brow"
+// }
+// window-rule {
+//     match app-id=r#"firefox"#
+//     open-maximized true
+//     open-on-workspace "2-brow"
+// }
+// window-rule {
+//     match app-id=r#"ghostty"#
+//     open-maximized true
+//     open-on-workspace "term"
+// }
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
@@ -247,13 +252,13 @@ window-rule {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
-spawn-at-startup "bitwarden"
+// spawn-at-startup "bitwarden"
 spawn-sh-at-startup "waypaper --random"
-spawn-at-startup "obs"
-spawn-at-startup "steam"
-spawn-at-startup "obsidian"
-spawn-at-startup "spotify"
-spawn-at-startup "chromium"
+// spawn-at-startup "obs"
+// spawn-at-startup "steam"
+// spawn-at-startup "obsidian"
+// spawn-at-startup "spotify"
+// spawn-at-startup "chromium"
 spawn-at-startup "ghostty"
 
 binds {
@@ -268,8 +273,8 @@ binds {
     Mod+W hotkey-overlay-title="toggle waybar" repeat=false { spawn-sh "pkill -SIGUSR1 waybar || waybar"; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal " { spawn "ghostty"; }
-    Mod+B hotkey-overlay-title="Open a Browser " { spawn "chromium"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal " { spawn "ghostty"; }
+    Mod+B hotkey-overlay-title="Open a Browser " { spawn "firefox"; }
     Mod+O hotkey-overlay-title="Open a Obsidian " { spawn "obsidian"; }
     Mod+E hotkey-overlay-title="Open a FileManager " { spawn "nautilus"; }
     Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel"; }

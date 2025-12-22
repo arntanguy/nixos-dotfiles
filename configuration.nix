@@ -59,6 +59,8 @@
     description = "Main User";
     extraGroups = [
       "wheel"
+      "dialout"
+      "plugdev"
       "networkmanager"
       "wireshark"
       "docker"
@@ -71,6 +73,7 @@
   # See modules/home/nvidia.nix for programs requiring nvidia to run (davinci-resolve, blender, darktable, etc)
   environment.systemPackages = with pkgs; [
     gimp
+    eog # eye-of-gnome image viewer
     godot
     krita
     ffmpeg
@@ -91,6 +94,7 @@
     swaynotificationcenter
     neovim
     inputs.nixCats.packages."${pkgs.system}".nixCats
+    helix
     wget
     wl-clipboard-rs
     git
@@ -99,8 +103,8 @@
     curl
     wlogout
     discord
+    slack
     obs-studio
-    spotify
     lsd
     bat
     tmux
@@ -151,7 +155,7 @@
     grub2
     xwayland
     xwayland-satellite
-	bzmenu
+    bzmenu # for bluetooth
   ];
 
   hardware = {
