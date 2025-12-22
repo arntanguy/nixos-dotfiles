@@ -29,7 +29,10 @@
     grub.useOSProber = true;
     efi.canTouchEfiVariables = true;
   };
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot = {
+    kernelPackages = pkgs.linuxPackages;
+    supportedFilesystems = [ "ntfs" ];
+  };
 
   networking = {
     hostName = globals.HostName;
