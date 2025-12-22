@@ -6,7 +6,7 @@
 }:
 
 {
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   imports = [
     ./waybar/waybar.nix
@@ -17,6 +17,7 @@
     ./nvim.nix
     ./ghostty.nix
     ./git.nix
+    ./scripts/scripts.nix
   ];
 
   dconf.settings = {
