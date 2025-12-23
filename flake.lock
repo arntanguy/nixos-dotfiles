@@ -30,15 +30,17 @@
       "locked": {
         "lastModified": 1766337534,
         "narHash": "sha256-arKsqH/S3wi3/ahFuRESoaoSBsl2e8P2qR0mIfKS1SI=",
-        "owner": "arntanguy",
-        "repo": "nvim-nix",
+        "ref": "refs/heads/main",
         "rev": "a63ca4a56c69f42664d2adeebbec5a32eb956885",
-        "type": "github"
+        "revCount": 1,
+        "submodules": true,
+        "type": "git",
+        "url": "file:./modules/home/nvim-nix"
       },
       "original": {
-        "owner": "arntanguy",
-        "repo": "nvim-nix",
-        "type": "github"
+        "submodules": true,
+        "type": "git",
+        "url": "file:./modules/home/nvim-nix"
       }
     },
     "nixCats_2": {

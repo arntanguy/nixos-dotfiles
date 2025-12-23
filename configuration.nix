@@ -156,6 +156,8 @@
     xwayland
     xwayland-satellite
     bzmenu # for bluetooth
+    pciutils # lspci
+    usbutils # lsusb
   ];
 
   hardware = {

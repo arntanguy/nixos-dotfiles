@@ -9,7 +9,8 @@
     };
     nixCats = {
       # url = "github:BirdeeHub/nixCats-nvim?dir=templates/example";
-      url = "github:arntanguy/nvim-nix";
+      # url = "github:arntanguy/nvim-nix";
+      url = "git+file:./modules/home/nvim-nix?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
