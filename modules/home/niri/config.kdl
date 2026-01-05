@@ -42,12 +42,34 @@ input {
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     focus-follows-mouse max-scroll-amount="0%"
 }
-output "HDMI-A-1" {
-    mode "1920x1080@72"
-    scale 1
-    transform "normal"
-    position x=1280 y=0
+
+// Internal monitor (dell precision)
+output "eDP-1" {
+    mode "3840x2160"
+    position x=0 y=0
+    scale 2.25
 }
+
+// External monitor (home)
+output "Dell Inc. DELL P2719HC FT8ZX13" {
+    // Standard 1080p resolution for this model
+    // You can also use "1920x1080@60.000" to be precise
+    mode "1920x1080"
+    
+    // Position it to the right of your laptop (assuming laptop is 3840px wide)
+    // If your laptop has a scale of 2.25, x would be 3840/2.25=1706 (logical pixels)
+    position x=1707 y=0
+    
+    // Scale 1.0 is standard for a 27" 1080p monitor
+    scale 1.0
+}
+
+// Fallback for HDMI-A-1 if another monitor is connected
+output "HDMI-A-1" {
+   position x=1707 y=0
+}
+
+
 overview {
     zoom 0.45
 }
