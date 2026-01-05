@@ -196,6 +196,7 @@
       dedicatedServer.openFirewall = true;
     };
     gamemode.enable = true;
+    direnv.enable = true;
   };
   security.polkit.enable = true;
   virtualisation.docker.enable = true;
