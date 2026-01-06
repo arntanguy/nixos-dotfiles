@@ -13,14 +13,19 @@
       url = "git+file:./modules/home/nvim-nix?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # secrets management
+    sops-nix = {
+        url = "github:Mic92/sops-nix";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
-      self,
       nixpkgs,
       home-manager,
-      nixCats,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -41,6 +46,7 @@
         specialArgs = { inherit globals; inherit inputs; };
         modules = [
           ./configuration.nix
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

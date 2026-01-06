@@ -11,6 +11,11 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/home/arnaud/.config/sops/age/keys.txt";
+  # secrets are available as root in /run/secrets/<path>
+  sops.secrets."data/networking/wifi/LIRMM"= { };
 
   nixpkgs.config.allowUnfree = true;
 
@@ -36,7 +41,38 @@
 
   networking = {
     hostName = globals.HostName;
-    networkmanager.enable = true;
+
+    networkmanager = {
+     enable = true;
+     # Add default profiles to autoconnect
+     # Note: secrets are available as files at runtime decripted by sops (in /run/secrets)
+     # Set key-value pairs in secrets.yaml, and use the generated file as an environmentFiles entry for network manager. Secrets are then available as variables $SECRET_NAME in network profiles.
+     ensureProfiles = {
+            environmentFiles = [ config.sops.secrets."data/networking/wifi/LIRMM".path ];
+            profiles = {
+                LIRMM = {
+                  connection = {
+                    id = "LIRMM";
+                    type = "wifi";
+                    autoconnect = true;
+                  };
+                  wifi = {
+                    mode = "infrastructure";
+                    ssid = "LIRMM";
+                  };
+                  wifi-security = {
+                    key-mgmt = "wpa-eap";
+                  };
+                  "802-1x" = {
+                    eap = "peap";
+                    identity = "$LIRMM_USER"; 
+                    password = "$LIRMM_PASSWORD";
+                    phase2-auth = "mschapv2";
+                  };
+                };
+              };
+        };
+    };
     hosts = {
       "192.168.18.33" = [ "raspi.casa.local" ];
       "10.129.182.29" = [
@@ -72,6 +108,7 @@
 
   # See modules/home/nvidia.nix for programs requiring nvidia to run (davinci-resolve, blender, darktable, etc)
   environment.systemPackages = with pkgs; [
+    sops
     gimp
     eog # eye-of-gnome image viewer
     godot
@@ -110,6 +147,7 @@
     tmux
     fzf
     lazygit
+    gh # github cli
     lazydocker
     fuzzel
     ghostty
