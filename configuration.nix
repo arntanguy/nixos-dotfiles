@@ -135,6 +135,8 @@
     wget
     wl-clipboard-rs
     git
+    cmakeCurses
+    pre-commit
     glib
     steam-run
     curl
@@ -190,6 +192,8 @@
     thc-hydra
     qbittorrent
 
+    zoom-us
+
     grub2
     xwayland
     xwayland-satellite
@@ -226,7 +230,7 @@
     niri.enable = true;
     xwayland.enable = true;
     wireshark.enable = true;
-	firefox.enable = true;
+    firefox.enable = true;
 
     steam = {
       enable = true;
