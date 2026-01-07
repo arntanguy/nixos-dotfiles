@@ -10,7 +10,8 @@
     nixCats = {
       # url = "github:BirdeeHub/nixCats-nvim?dir=templates/example";
       # url = "github:arntanguy/nvim-nix";
-      url = "git+file:./modules/home/nvim-nix?submodules=1";
+      # url = "git+file:./modules/home/nvim-nix?submodules=1";
+      url = "github:arntanguy/nvim-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
