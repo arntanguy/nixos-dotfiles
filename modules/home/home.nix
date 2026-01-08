@@ -19,6 +19,7 @@
     ./git.nix
     ./scripts/scripts.nix
     ./nvidia.nix
+    ./ssh.nix
     # ./davinci-resolve.nix
   ];
 

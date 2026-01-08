@@ -1,6 +1,6 @@
 {
-  config,
   pkgs,
+  config,
   globals,
   inputs,
   ...
@@ -11,11 +11,20 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-  sops.age.keyFile = "/home/arnaud/.config/sops/age/keys.txt";
-  # secrets are available as root in /run/secrets/<path>
-  sops.secrets."data/networking/wifi/LIRMM"= { };
+
+  sops = {
+    age.keyFile = "/home/arnaud/.config/sops/age/keys.txt";
+    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    # secrets are available as root in /run/secrets/<path> by default
+    secrets = {
+        "data/networking/wifi/LIRMM"= { };
+        "ssh_keys/arnaud-dell-precision7560" = {
+          path = "/home/${globals.UserName}/.ssh/id_arnaud-dell-precision7560";
+          owner = globals.UserName;
+        };
+    };
+  };
 
   nixpkgs.config.allowUnfree = true;
 
@@ -85,6 +94,15 @@
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  services.openssh = {
+    enable = true;
+    # Optional: allow password authentication (default is false)
+    passwordAuthentication = true;
+    # Optional: allow root login (default is "prohibit-password")
+    # permitRootLogin = "no";
+    # Optional: open the firewall for SSH
+    openFirewall = true;
+  };
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -109,6 +127,7 @@
   # See modules/home/nvidia.nix for programs requiring nvidia to run (davinci-resolve, blender, darktable, etc)
   environment.systemPackages = with pkgs; [
     sops
+    gnupg
     gimp
     eog # eye-of-gnome image viewer
     godot
