@@ -79,15 +79,54 @@
                     phase2-auth = "mschapv2";
                   };
                 };
+                arnaud-android-ap = {
+                  connection = {
+                    id = "arnaud-android-ap";
+                    type = "wifi";
+                    autoconnect = false;
+                  };
+                  wifi = {
+                    mode = "infrastructure";
+                    ssid = "arnaud";
+                  };
+                  wifi-security = {
+                    key-mgmt = "wpa-psk";
+                    psk = "$ARNAUD_ANDROID_AP_PASSWORD";
+                  };
+                  ipv4 = {
+                    method = "auto";
+                  };
+                  ipv6 = {
+                    method = "ignore";
+                  };
+                };
+                robots-ethernet = {
+                  connection = {
+                    id = "Robots Ethernet";
+                    type = "ethernet";
+                    autoconnect = false;
+                  };
+                  ipv4 = {
+                    method = "manual";
+                    address1 = "10.4.5.42/24"; # for hrp4005c and rhps1
+                    address2 = "172.16.0.42/16"; # for panda6 and panda7
+                    address3 = "192.168.1.42/24"; # for panda2
+                  };
+                  ipv6 = {
+                    method = "ignore";
+                  };
+                };
               };
         };
     };
     hosts = {
-      "192.168.18.33" = [ "raspi.casa.local" ];
-      "10.129.182.29" = [
-        "blog.inlanefreight.local"
-        "blog-dev.inlanefreight.local"
-      ];
+      "192.168.1.100" = [ "ur10_1" ];
+      "192.168.1.200" = [ "ur10_2" ];
+      "10.4.5.1" = [ "hrp4005c" ];
+      "10.4.5.120" = [ "rhps1" ];
+      "172.16.0.6" = [ "panda6" ];
+      "172.16.1.7" = [ "panda7" ];
+      "192.168.1.2" = [ "panda2" ];
     };
   };
 
@@ -107,7 +146,7 @@
     layout = "us";
     variant = "";
   };
-
+  services.gvfs.enable = true;
   users.users.${globals.UserName} = {
     isNormalUser = true;
     description = "Main User";
@@ -123,6 +162,32 @@
     packages = with pkgs; [
       chromium
     ];
+  };
+
+  # Enable CUPS and Avahi (for printer discovery):
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
+  };
+  # hardware.printers = {
+  #   # ensureDefaultPrinter = "robcolor";
+  #   ensurePrinters = [
+  #     {
+  #       deviceUri = "ipp://robcolor.lirmm.fr/ipp";
+  #       location = "work";
+  #       name = "robcolor";
+  #       model = "everywhere";
+  #     }
+  #   ];
+  # };
+  # avahi enables resolution of *.local hostnames
+  services.avahi = { #
+    enable = true;
+    nssmdns = true; # This adds mdns to /etc/nsswitch.conf for hosts
+    openFirewall = true; # Optional: open mDNS port in firewall
   };
 
   # home-row mods
@@ -251,6 +316,7 @@
     bluetooth.enable = true;
   };
   services.xserver.videoDrivers = [ "nvidia" ];
+  services.dbus.enable = true;
 
   xdg.portal.wlr.enable = true;
   fonts = {
