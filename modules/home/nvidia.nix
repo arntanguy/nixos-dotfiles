@@ -51,8 +51,11 @@ in {
     # Install the wrapped versions of your apps requiring nvidia card
     (maybeWrapPrime pkgs.davinci-resolve)
     (maybeWrapPrime pkgs.blender)
+    (maybeWrapPrime pkgs.meshlab)
     (maybeWrapPrime pkgs.darktable)
     (maybeWrapPrime pkgs.vlc)
     (maybeWrapPrime pkgs.totem) # mostly for totem-video-thumbnailer for nautilus
+    # 3D printing
+    (maybeWrapPrime pkgs.prusa-slicer)
   ];
 }

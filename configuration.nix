@@ -144,6 +144,11 @@
   environment.systemPackages = with pkgs; [
     sops
     gnupg
+    element-desktop
+    zathura # pdf reader
+    evince
+    wsdd # Web Service Discovery (WSD) host daemon for SMB/Samba
+    jmtpfs
     gimp
     eog # eye-of-gnome image viewer
     godot
@@ -206,7 +211,7 @@
     bitwarden-desktop
     docker
     docker-compose
-    xdg-desktop-portal-wlr
+    devpod
     polkit
     nixfmt-rfc-style
     obsidian
