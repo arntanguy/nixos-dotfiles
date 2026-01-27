@@ -78,6 +78,19 @@ output "Dell Inc. DELL P2719HC 2Q8ZX13" {
     scale 1.0
 }
 
+// External monitor halle robotique table, left screen.
+output "Dell Inc. DELL P2719HC 9T8ZX13" {
+    // Standard 1080p resolution for this model
+    // You can also use "1920x1080@60.000" to be precise
+    mode "1920x1080"
+    
+    // Above main screen 
+    position x=0 y=-1080
+    
+    // Scale 1.0 is standard for a 27" 1080p monitor
+    scale 1.0
+}
+
 // Fallback for HDMI-A-1 if another monitor is connected
 output "HDMI-A-1" {
    position x=1707 y=0
@@ -296,6 +309,7 @@ spawn-sh-at-startup "waypaper --random"
 // spawn-at-startup "spotify"
 // spawn-at-startup "chromium"
 spawn-at-startup "ghostty"
+spawn-at-startup "sunsetr"
 
 binds {
     // "Mod" is a special modifier equal to Super when running on a TTY, and to Alt
