@@ -20,6 +20,7 @@
     ./scripts/scripts.nix
     ./nvidia.nix
     ./ssh.nix
+    ./kmonad/kmonad.nix
     # ./davinci-resolve.nix
   ];
 

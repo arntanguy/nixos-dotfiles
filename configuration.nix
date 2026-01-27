@@ -118,10 +118,26 @@
       "networkmanager"
       "wireshark"
       "docker"
+      "input"
     ];
     packages = with pkgs; [
       chromium
     ];
+  };
+
+  # home-row mods
+  services.kmonad = {
+   enable = true;
+   keyboards = {
+     myKMonadOutput = {
+       defcfg = {
+         enable = true;
+         fallthrough = true;
+       };
+       device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+       config = builtins.readFile ./modules/home/kmonad/config.kbd;
+     };
+   };
   };
 
   # See modules/home/nvidia.nix for programs requiring nvidia to run (davinci-resolve, blender, darktable, etc)
