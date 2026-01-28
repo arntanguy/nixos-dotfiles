@@ -26,8 +26,6 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   # Bootloader
   boot.loader = {
     systemd-boot.enable = false;
@@ -301,8 +299,7 @@
 
     grub2
     xwayland
-    #xwayland-satellite
-    inputs.xwayland-satellite.packages."${pkgs.system}".xwayland-satellite
+    xwayland-satellite
     bzmenu # for bluetooth
     pciutils # lspci
     usbutils # lsusb
@@ -319,7 +316,6 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   services.dbus.enable = true;
 
-  xdg.portal.wlr.enable = true;
   fonts = {
     fontconfig.enable = true;
     packages = with pkgs; [
@@ -344,6 +340,7 @@
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
     };
+
     gamemode.enable = true;
     direnv.enable = true;
   };

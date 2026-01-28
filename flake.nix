@@ -2,15 +2,12 @@
   description = "S13L custom NixOS + Home Manager config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    niri = {
-      url = "github:YaLTeR/niri";
-      inputs.nixpkgs.follows = "nixos-unstable";
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-25.11";
     };
     xwayland-satellite = {
       url = "github:Supreeeme/xwayland-satellite";
-      inputs.nixpkgs.follows = "nixos-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
         url = "github:nix-community/home-manager";
@@ -49,27 +46,17 @@
         Bwserver = "https://vault.arntanguy.fr";
       };
 
-      # Add an overlay to override some packages from nixos-unstable
-      # {
-      unstablePkgs = import inputs.nixos-unstable {
-        system = system;
-        config.allowUnfree = true;
-      };
-      overlays = [
+      # Define an overlay to override some packages
+      overlays =  [
         (final: prev: {
-          # niri = unstablePkgs.niri;
-          # xwayland-satellite = unstablePkgs.xwayland-satellite;
-          niri = inputs.niri.packages.${system}.default;
-          # niri = unstablePkgs.niri;
-          xwayland = unstablePkgs.xwayland;
-          # xwayland-satellite = unstablePkgs.xwayland-satellite;
-          xwayland-satellite = builtins.trace "Using flake input for xwayland-satellite: ${inputs.xwayland-satellite.packages.${system}.default.pname or "unknown"}" (assert inputs.xwayland-satellite.packages.${system}.default != null; inputs.xwayland-satellite.packages.${system}.default);
-          davinci-resolve = unstablePkgs.davinci-resolve;
+          # see https://github.com/Supreeeme/xwayland-satellite/issues/210
+          # This fixes drag and drop issues in Niri + xwayland-satellite, in particular in davinci resolve
+          xwayland-satellite = inputs.xwayland-satellite.packages.${system}.default;
         })
       ];
+      # define a new package set replacing nixpkgs input with the overlayed nixpkgs set
       pkgs = import nixpkgs {
-        inherit system;
-        overlays = overlays;
+        inherit system overlays;
         config.allowUnfree = true;
       };
     in
@@ -88,6 +75,7 @@
             home-manager.users.${globals.UserName} = import ./modules/home/home.nix;
           }
         ];
+        pkgs = pkgs; # pass your overlayed pkgs
       };
     };
 }
