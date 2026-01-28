@@ -1,0 +1,10 @@
+# This file is managed by makeOutOfStoreSymlink and is thus writable
+# This is mainly a hack to allow devpod to write its Host configuration to the ~/.ssh/config file
+
+AddKeysToAgent yes
+
+Host *
+  IdentityFile ~/.ssh/id_arnaud-dell-precision7560
+
+Host arntanguy.fr
+  User ubuntu

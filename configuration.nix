@@ -326,7 +326,6 @@
     displayManager.enable = true;
     displayManager.ly.enable = true;
     blueman.enable = true;
-    # services.openssh.enable = true;
   };
   programs = {
     nix-ld.enable = true;

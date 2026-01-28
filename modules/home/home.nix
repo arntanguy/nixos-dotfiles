@@ -14,12 +14,12 @@
     ./bash.nix
     ./fuzzel/fuzzel.nix
     ./tmux.nix
-    ./nvim.nix
+    # ./nvim.nix
     ./ghostty.nix
     ./git.nix
     ./scripts/scripts.nix
     ./nvidia.nix
-    ./ssh.nix
+    ./ssh/ssh.nix
     ./kmonad/kmonad.nix
     # ./davinci-resolve.nix
   ];
