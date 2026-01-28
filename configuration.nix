@@ -301,7 +301,8 @@
 
     grub2
     xwayland
-    xwayland-satellite
+    #xwayland-satellite
+    inputs.xwayland-satellite.packages."${pkgs.system}".xwayland-satellite
     bzmenu # for bluetooth
     pciutils # lspci
     usbutils # lsusb
