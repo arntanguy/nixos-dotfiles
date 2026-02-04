@@ -16,7 +16,15 @@
       networkmanager = {
        enable = true;
       };
+
     };
     modules.networkmanager.profiles.common.enable = lib.mkDefault true;
+
+    # avahi enables resolution of *.local hostnames
+    services.avahi = { #
+      enable = true;
+      nssmdns = true; # This adds mdns to /etc/nsswitch.conf for hosts
+      openFirewall = true; # Optional: open mDNS port in firewall
+    };
   };
 }
