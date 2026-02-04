@@ -12,19 +12,12 @@
     ./hardware-configuration.nix
   ];
 
-  sops = {
-    age.keyFile = "/home/arnaud/.config/sops/age/keys.txt";
-    defaultSopsFile = ./secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-    # secrets are available as root in /run/secrets/<path> by default
-    secrets = {
-        "data/networking/wifi/LIRMM"= { };
-        "ssh_keys/arnaud-dell-precision7560" = {
-          path = "/home/${globals.UserName}/.ssh/id_arnaud-dell-precision7560";
-          owner = globals.UserName;
-        };
-    };
-  };
+  # enable/disable custom services from ./module
+  # all modules are enabled/disabled through their modules.<module_name>.enable option
+  # e.g:
+  # modules.yubikey.enable = true;
+  # modules.sops.enable = true;
+  # ...
 
   # Bootloader
   boot.loader = {
@@ -46,87 +39,87 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
-  networking = {
-    hostName = globals.HostName;
-
-    networkmanager = {
-     enable = true;
-     # Add default profiles to autoconnect
-     # Note: secrets are available as files at runtime decripted by sops (in /run/secrets)
-     # Set key-value pairs in secrets.yaml, and use the generated file as an environmentFiles entry for network manager. Secrets are then available as variables $SECRET_NAME in network profiles.
-     ensureProfiles = {
-            environmentFiles = [ config.sops.secrets."data/networking/wifi/LIRMM".path ];
-            profiles = {
-                LIRMM = {
-                  connection = {
-                    id = "LIRMM";
-                    type = "wifi";
-                    autoconnect = true;
-                  };
-                  wifi = {
-                    mode = "infrastructure";
-                    ssid = "LIRMM";
-                  };
-                  wifi-security = {
-                    key-mgmt = "wpa-eap";
-                  };
-                  "802-1x" = {
-                    eap = "peap";
-                    identity = "$LIRMM_USER"; 
-                    password = "$LIRMM_PASSWORD";
-                    phase2-auth = "mschapv2";
-                  };
-                };
-                arnaud-android-ap = {
-                  connection = {
-                    id = "arnaud-android-ap";
-                    type = "wifi";
-                    autoconnect = false;
-                  };
-                  wifi = {
-                    mode = "infrastructure";
-                    ssid = "arnaud";
-                  };
-                  wifi-security = {
-                    key-mgmt = "wpa-psk";
-                    psk = "$ARNAUD_ANDROID_AP_PASSWORD";
-                  };
-                  ipv4 = {
-                    method = "auto";
-                  };
-                  ipv6 = {
-                    method = "ignore";
-                  };
-                };
-                robots-ethernet = {
-                  connection = {
-                    id = "Robots Ethernet";
-                    type = "ethernet";
-                    autoconnect = false;
-                  };
-                  ipv4 = {
-                    method = "manual";
-                    address1 = "10.4.5.42/24"; # for hrp4005c and rhps1
-                    address2 = "172.16.0.42/16"; # for panda6 and panda7
-                    address3 = "192.168.1.42/24"; # for panda2
-                  };
-                  ipv6 = {
-                    method = "ignore";
-                  };
-                };
-              };
-        };
-    };
-    hosts = {
-      "192.168.1.100" = [ "ur10_1" ];
-      "192.168.1.200" = [ "ur10_2" ];
-      "10.4.5.1" = [ "hrp4005c" ];
-      "10.4.5.120" = [ "rhps1" ];
-      "172.16.0.6" = [ "panda6" ];
-      "172.16.1.7" = [ "panda7" ];
-      "192.168.1.2" = [ "panda2" ];
-    };
-  };
+  # networking = {
+  #   hostName = globals.HostName;
+  #
+  #   networkmanager = {
+  #    enable = true;
+  #    # Add default profiles to autoconnect
+  #    # Note: secrets are available as files at runtime decripted by sops (in /run/secrets)
+  #    # Set key-value pairs in secrets.yaml, and use the generated file as an environmentFiles entry for network manager. Secrets are then available as variables $SECRET_NAME in network profiles.
+  #    ensureProfiles = {
+  #           environmentFiles = [ config.sops.secrets."data/networking/wifi/LIRMM".path ];
+  #           profiles = {
+  #               LIRMM = {
+  #                 connection = {
+  #                   id = "LIRMM";
+  #                   type = "wifi";
+  #                   autoconnect = true;
+  #                 };
+  #                 wifi = {
+  #                   mode = "infrastructure";
+  #                   ssid = "LIRMM";
+  #                 };
+  #                 wifi-security = {
+  #                   key-mgmt = "wpa-eap";
+  #                 };
+  #                 "802-1x" = {
+  #                   eap = "peap";
+  #                   identity = "$LIRMM_USER"; 
+  #                   password = "$LIRMM_PASSWORD";
+  #                   phase2-auth = "mschapv2";
+  #                 };
+  #               };
+  #               arnaud-android-ap = {
+  #                 connection = {
+  #                   id = "arnaud-android-ap";
+  #                   type = "wifi";
+  #                   autoconnect = false;
+  #                 };
+  #                 wifi = {
+  #                   mode = "infrastructure";
+  #                   ssid = "arnaud";
+  #                 };
+  #                 wifi-security = {
+  #                   key-mgmt = "wpa-psk";
+  #                   psk = "$ARNAUD_ANDROID_AP_PASSWORD";
+  #                 };
+  #                 ipv4 = {
+  #                   method = "auto";
+  #                 };
+  #                 ipv6 = {
+  #                   method = "ignore";
+  #                 };
+  #               };
+  #               robots-ethernet = {
+  #                 connection = {
+  #                   id = "Robots Ethernet";
+  #                   type = "ethernet";
+  #                   autoconnect = false;
+  #                 };
+  #                 ipv4 = {
+  #                   method = "manual";
+  #                   address1 = "10.4.5.42/24"; # for hrp4005c and rhps1
+  #                   address2 = "172.16.0.42/16"; # for panda6 and panda7
+  #                   address3 = "192.168.1.42/24"; # for panda2
+  #                 };
+  #                 ipv6 = {
+  #                   method = "ignore";
+  #                 };
+  #               };
+  #             };
+  #       };
+  #   };
+  #   hosts = {
+  #     "192.168.1.100" = [ "ur10_1" ];
+  #     "192.168.1.200" = [ "ur10_2" ];
+  #     "10.4.5.1" = [ "hrp4005c" ];
+  #     "10.4.5.120" = [ "rhps1" ];
+  #     "172.16.0.6" = [ "panda6" ];
+  #     "172.16.1.7" = [ "panda7" ];
+  #     "192.168.1.2" = [ "panda2" ];
+  #   };
+  # };
 
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -189,6 +182,7 @@
   };
 
   # home-row mods
+  # see https://precondition.github.io/home-row-mods
   services.kmonad = {
    enable = true;
    keyboards = {
@@ -198,14 +192,13 @@
          fallthrough = true;
        };
        device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
-       config = builtins.readFile ./modules/home/kmonad/config.kbd;
+       config = builtins.readFile ../../modules/home/kmonad/config.kbd;
      };
    };
   };
 
   # See modules/home/nvidia.nix for programs requiring nvidia to run (davinci-resolve, blender, darktable, etc)
   environment.systemPackages = with pkgs; [
-    sops
     gnupg
     element-desktop
     zathura # pdf reader

@@ -3,6 +3,16 @@
 
 AddKeysToAgent yes
 
+# DevPod Start panda-prosthesis-superbuild.devpod
+Host panda-prosthesis-superbuild.devpod
+  ForwardAgent yes
+  LogLevel error
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
+  ProxyCommand "/nix/store/drdcgg1rxcgir1y2swrpavjbhkycs8kv-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode panda-prosthesis-superbuild --workdir "/home/vscode/superbuild"
+  User vscode
+# DevPod End panda-prosthesis-superbuild.devpod
 Host *
   IdentityFile ~/.ssh/id_arnaud-dell-precision7560
 

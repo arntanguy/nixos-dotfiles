@@ -1,5 +1,5 @@
 {
-  description = "S13L custom NixOS + Home Manager config";
+  description = "arntanguy's custom NixOS + Home Manager config";
 
   inputs = {
     nixpkgs = {
@@ -65,7 +65,9 @@
         inherit system;
         specialArgs = { inherit globals; inherit inputs; };
         modules = [
-          ./configuration.nix
+          ./hosts/dell-precision-work/configuration.nix
+          ./modules
+          # ./configuration.nix
           sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
