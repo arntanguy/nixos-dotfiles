@@ -116,16 +116,13 @@
     adw-gtk3
     bitwarden-desktop
     discord
-    element-desktop
     eog # eye-of-gnome image viewer
-    evince
     ffmpeg
     ghostty
     gimp
     godot
     krita
     obs-studio
-    obsidian
     papirus-icon-theme
     pavucontrol
     playerctl
@@ -134,8 +131,6 @@
     waybar
     waybar-mpris
     waypaper
-    zathura # pdf reader
-    zoom-us
 
     # Security & Networking
     burpsuite
@@ -153,7 +148,6 @@
     qbittorrent
     rockyou
     seclists
-    slack
     sqlmap
     steam
     steam-run
