@@ -14,7 +14,9 @@ Host panda-prosthesis-superbuild.devpod
   User vscode
 # DevPod End panda-prosthesis-superbuild.devpod
 Host *
-  IdentityFile ~/.ssh/id_arnaud-dell-precision7560
+  IdentityFile ~/.ssh/yubikey.pub
 
 Host arntanguy.fr
   User ubuntu
+  # Force SSH to use the agent and ignore the file system
+  IdentitiesOnly yes

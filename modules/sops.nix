@@ -17,10 +17,6 @@
       # secrets are available as root in /run/secrets/<path> by default
       secrets = {
           "data/networking/wifi/LIRMM"= { };
-          "ssh_keys/arnaud-dell-precision7560" = {
-            path = "/home/${globals.UserName}/.ssh/id_arnaud-dell-precision7560";
-            owner = globals.UserName;
-          };
       };
     };
 
