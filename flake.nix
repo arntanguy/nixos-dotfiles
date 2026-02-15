@@ -52,12 +52,28 @@
           # see https://github.com/Supreeeme/xwayland-satellite/issues/210
           # This fixes drag and drop issues in Niri + xwayland-satellite, in particular in davinci resolve
           xwayland-satellite = inputs.xwayland-satellite.packages.${system}.default;
+          # FIXME: this overlay is done to force-enable google-accounts support in gvfs, which is required for google-drive support in nautilus.
+          # This is necessary for nixos 25.11, as google account support is disabled by default as there are security vulnerabilities
+          # in libsoup. see https://github.com/NixOS/nixpkgs/issues/438121
+          # required by modules/nautilus.nix
+          gnome = prev.gnome.overrideScope (gfinal: gprev: {
+            gvfs = gprev.gvfs.override {
+              googleSupport = true;
+              gnomeSupport = true;
+            };
+          });
         })
       ];
       # define a new package set replacing nixpkgs input with the overlayed nixpkgs set
       pkgs = import nixpkgs {
         inherit system overlays;
-        config.allowUnfree = true;
+        config = {
+          allowUnfree = true;
+          permittedInsecurePackages = [
+            # Required by gnome.gvfs.googleSupport in nixkpgs overlay
+            "libsoup-2.74.3" 
+          ];
+        };
       };
     in
     {

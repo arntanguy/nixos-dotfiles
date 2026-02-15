@@ -51,7 +51,6 @@
     # Optional: open the firewall for SSH
     openFirewall = true;
   };
-  services.gvfs.enable = true;
   users.users.${globals.UserName} = {
     isNormalUser = true;
     description = "Main User";
@@ -109,7 +108,6 @@
     wget
 
     # Clipboard & File Management
-    nautilus
     wl-clipboard-rs
 
     # Media & Graphics

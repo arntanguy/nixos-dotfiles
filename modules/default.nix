@@ -3,6 +3,7 @@
   imports = [
     ./yubikey.nix
     ./sops.nix
+    ./nautilus.nix
     ./networkmanager
     ./keyboard
     ./programs
@@ -14,4 +15,5 @@
   modules.networkmanager.enable = lib.mkDefault true;
   # Enable home-row mods by default
   modules.keyboard-mods.enable = lib.mkDefault true;
+  modules.nautilus.enable = lib.mkDefault true;
 }
