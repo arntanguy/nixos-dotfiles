@@ -68,52 +68,14 @@
     ];
   };
 
-  # Enable CUPS and Avahi (for printer discovery):
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      cups-filters
-      cups-browsed
-    ];
-  };
-  # hardware.printers = {
-  #   # ensureDefaultPrinter = "robcolor";
-  #   ensurePrinters = [
-  #     {
-  #       deviceUri = "ipp://robcolor.lirmm.fr/ipp";
-  #       location = "work";
-  #       name = "robcolor";
-  #       model = "everywhere";
-  #     }
-  #   ];
-  # };
   # See modules/home/nvidia.nix for programs requiring nvidia to run (davinci-resolve, blender, darktable, etc)
   environment.systemPackages = with pkgs; [
-    # Nix/NixOS Tools
-    nh
-    nixfmt-rfc-style
-    inputs.nixCats.packages."${pkgs.system}".nixCats
-
-    # Utilities
-    bat
-    btop
-    curl
-    fastfetch
-    fzf
-    jq
-    lsd
-    ripgrep
-    starship
-    tmux
-    wget
-
     # Clipboard & File Management
     wl-clipboard-rs
 
     # Media & Graphics
     adw-gtk3
     bitwarden-desktop
-    discord
     eog # eye-of-gnome image viewer
     ffmpeg
     ghostty
@@ -131,28 +93,14 @@
     waypaper
 
     # Security & Networking
-    burpsuite
-    caido
-    devpod
-    docker
-    docker-compose
-    gobuster
-    hashcat
-    john
-    metasploit
-    nmap
     openvpn
     polkit
     qbittorrent
-    rockyou
-    seclists
     sqlmap
     steam
     steam-run
-    thc-hydra
     wireshark
     wordlists
-    wsdd # Web Service Discovery (WSD) host daemon for SMB/Samba
 
     # Bluetooth & Hardware
     bzmenu # for bluetooth

@@ -4,6 +4,7 @@
     ./yubikey.nix
     ./sops.nix
     ./nautilus.nix
+    ./printing.nix
     ./networkmanager
     ./keyboard
     ./programs
@@ -16,4 +17,5 @@
   # Enable home-row mods by default
   modules.keyboard-mods.enable = lib.mkDefault true;
   modules.nautilus.enable = lib.mkDefault true;
+  modules.printing.enable = lib.mkDefault true;
 }

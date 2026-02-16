@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, inputs, ... }:
 {
   options = {
     modules.programs.devtools.enable = 
@@ -18,9 +18,13 @@
       lazydocker
       lazygit
       musl
-      neovim
       pre-commit
       vscode
+      inputs.nixCats.packages."${pkgs.system}".nixCats
+      devpod
+      docker
+      docker-compose
+      nixfmt-rfc-style
     ];
   };
 }
