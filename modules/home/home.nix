@@ -20,6 +20,7 @@
     ./scripts/scripts.nix
     ./nvidia.nix
     ./ssh/ssh.nix
+    ./email.nix
     # ./davinci-resolve.nix
   ];
 
