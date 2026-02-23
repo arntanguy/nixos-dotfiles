@@ -10,6 +10,10 @@
       init.defaultBranch = "main";
       pull.rebase = true;
       color.ui = "auto";
+      # Use SSH instead of HTTPS for GitHub
+      url."git@github.com:".insteadOf = "https://github.com/";
+      commit.gpgSign = true;
+      user.signingKey = "5888959633A5715A";
     };
   };
 }
