@@ -19,6 +19,7 @@
       lazygit
       musl
       pre-commit
+      prek
       vscode
       inputs.nixCats.packages."${pkgs.system}".nixCats
       devpod

@@ -12,6 +12,27 @@
     ./hardware-configuration.nix
   ];
 
+  nix = {
+    trustedUsers = [ "root" "${globals.UserName}" ]; # Replace with your actual username
+    settings = {
+      substituters = [
+        "https://cache.nixos.org/"
+        "https://mc-rtc-nix.cachix.org"
+        "https://ros.cachix.org"
+      ];
+      trusted-public-keys = [
+        "mc-rtc-nix.cachix.org-1:5M3sLvHXJCep4wc1tQl7QuFWL2eH2I0jkuvWtqJDYQs="
+        "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
+      ];
+    };
+    # See https://nixos.wiki/wiki/Storage_optimization
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+  };
+
   # enable/disable custom services from ./module
   # all modules are enabled/disabled through their modules.<module_name>.enable option
   # e.g:
