@@ -37,14 +37,6 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      globals = {
-        # this are the variables that you wanna change xd
-        UserName = "arnaud"; 
-        HostName = "arnaud";
-        GitName = "Arnaud TANGUY";
-        GitEmail = "arn.tanguy@gmail.com";
-        Bwserver = "https://vault.arntanguy.fr";
-      };
 
       # Define an overlay to override some packages
       overlays =  [
@@ -77,23 +69,25 @@
       };
     in
     {
-      nixosConfigurations.${globals.HostName} = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."arnaud" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit globals; inherit inputs; };
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/dell-precision-work/configuration.nix
           ./modules
-          # ./configuration.nix
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit globals; };
-            home-manager.users.${globals.UserName} = import ./modules/home/home.nix;
-          }
         ];
         pkgs = pkgs; # pass your overlayed pkgs
+      };
+
+      # dell precision 5570 for panda control (old Julien's laptop)
+      nixosConfigurations."lirmm-bamboo" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/lirmm-bamboo/configuration.nix
+          ./modules
+        ];
+        pkgs = pkgs;
       };
     };
 }
