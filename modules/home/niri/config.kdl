@@ -43,8 +43,14 @@ input {
     focus-follows-mouse max-scroll-amount="0%"
 }
 
-// Internal monitor (dell precision)
-output "eDP-1" {
+// output "eDP-1" {
+//     mode "3840x2160"
+//     position x=0 y=0
+//     scale 2.25
+// }
+
+// Internal monitor (dell precision work)
+output "Dell Inc. DELL P2719HC 2Q8ZX13" {
     mode "3840x2160"
     position x=0 y=0
     scale 2.25

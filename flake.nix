@@ -71,7 +71,11 @@
     {
       nixosConfigurations."arnaud" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = 
+        {
+          inherit inputs; 
+          globals = import ./hosts/dell-precision-work/globals.nix;
+        };
         modules = [
           ./hosts/dell-precision-work/configuration.nix
           ./modules

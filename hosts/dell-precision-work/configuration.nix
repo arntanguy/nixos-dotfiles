@@ -6,16 +6,6 @@
   ...
 }:
 
-let
-  globals = {
-    # this are the variables that you wanna change xd
-    UserName = "arnaud"; 
-    HostName = "arnaud";
-    GitName = "Arnaud TANGUY";
-    GitEmail = "arn.tanguy@gmail.com";
-    Bwserver = "https://vault.arntanguy.fr";
-  };
-in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -26,7 +16,7 @@ in
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = { inherit globals; };
-      home-manager.users.${globals.UserName} = import ./modules/home/home.nix;
+      home-manager.users.${globals.UserName} = import ../../modules/home/home.nix;
     }
   ];
 

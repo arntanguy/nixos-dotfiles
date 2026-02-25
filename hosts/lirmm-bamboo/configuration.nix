@@ -16,9 +16,13 @@
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
       home-manager.extraSpecialArgs = { inherit globals; };
-      home-manager.users.${globals.UserName} = import ../modules/home/home.nix;
+      home-manager.users.${globals.UserName} = import ../../modules/home/home.nix;
     }
   ];
+
+  # Disable secrets management for this host
+  # also removes networkmanager profiles that depend on a password
+  modules.sops.enable = false;
 
   nix = {
     trustedUsers = [ "root" "${globals.UserName}" ]; # Replace with your actual username
