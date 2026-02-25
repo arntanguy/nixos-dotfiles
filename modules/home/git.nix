@@ -12,6 +12,8 @@
       color.ui = "auto";
       # Use SSH instead of HTTPS for GitHub
       url."git@github.com:".insteadOf = "https://github.com/";
+      # GPG signing.
+      # Export the corresponding public key with gpg --armor --export 5888959633A5715A > yubikey.pub
       commit.gpgSign = true;
       user.signingKey = "5888959633A5715A";
     };

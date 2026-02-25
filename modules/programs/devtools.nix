@@ -26,6 +26,7 @@
       docker
       docker-compose
       nixfmt-rfc-style
+      nurl # Generate Nix Fetcher calls from repository URLs
     ];
   };
 }
