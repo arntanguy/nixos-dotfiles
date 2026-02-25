@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, globals, ... }:
 {
   options = {
     modules.networkmanager.profiles.lirmm-pandas.enable = 
@@ -15,7 +15,7 @@
     }
     (lib.mkIf config.modules.networkmanager.profiles.lirmm-pandas.enable {
       networking = {
-         interfaces.enp58s0u1u1 = {
+         interfaces.${globals.EthernetInterface} = {
             ipv4.addresses = [
               {
                 address = "172.16.0.43";
