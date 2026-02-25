@@ -82,7 +82,11 @@
       # dell precision 5570 for panda control (old Julien's laptop)
       nixosConfigurations."lirmm-bamboo" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = 
+        { 
+          inherit inputs; 
+          globals = import ./hosts/lirmm-bamboo/globals.nix;
+        };
         modules = [
           ./hosts/lirmm-bamboo/configuration.nix
           ./modules
