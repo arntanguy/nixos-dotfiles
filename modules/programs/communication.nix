@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, unstablePkgs, lib, config, ... }:
 {
   options = {
     modules.programs.communication.enable = 
@@ -9,8 +9,10 @@
     environment.systemPackages = with pkgs; [
       element-desktop # matrix
       slack
-      zoom-us
+      # zoom-us
       discord
+    ] ++ [
+      unstablePkgs.zoom-us
     ];
   };
 }

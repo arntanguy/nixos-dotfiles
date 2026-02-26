@@ -5,6 +5,9 @@
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-25.11";
     };
+    nixpkgs-unstable = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
     xwayland-satellite = {
       url = "github:Supreeeme/xwayland-satellite";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,6 +78,10 @@
         {
           inherit inputs; 
           globals = import ./hosts/dell-precision-work/globals.nix;
+          unstablePkgs = import inputs.nixpkgs-unstable {
+            system = system;
+            config.allowUnfree = true;
+          };
         };
         modules = [
           ./hosts/dell-precision-work/configuration.nix
