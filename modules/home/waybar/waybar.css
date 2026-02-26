@@ -41,7 +41,9 @@ window#waybar {
 #custom-exit,
 #group-tray-expander,
 #custom-expand-icon,
-#mpris {
+#mpris
+#bluetooth
+{
     border-radius: 6px;
     margin: 0px 1px;
     padding: 0px 6px;
@@ -60,6 +62,7 @@ window#waybar {
 #custom-startmenu { color: #D2A6FF; }
 #custom-expand-icon { color: #59C2FF; }
 #mpris { color: #FF8F40; }
+#bluetooth { color: #59C2FF; }
 #idle_inhibitor { color: #FF8F40; }
 #battery { color: #F07178; }
 #custom-exit { color: #D2A6FF; }

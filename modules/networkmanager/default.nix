@@ -2,6 +2,7 @@
 {
   imports = [
     ./profiles/common.nix
+    ./profiles/lirmm-pandas.nix
   ];
 
   options = {
@@ -19,6 +20,7 @@
 
     };
     modules.networkmanager.profiles.common.enable = lib.mkDefault true;
+    modules.networkmanager.profiles.lirmm-pandas.enable = lib.mkDefault true;
 
     # avahi enables resolution of *.local hostnames
     services.avahi = { #

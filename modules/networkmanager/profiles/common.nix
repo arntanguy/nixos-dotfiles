@@ -12,9 +12,6 @@
         "192.168.1.200" = [ "ur10_2" ];
         "10.4.5.1" = [ "hrp4005c" ];
         "10.4.5.120" = [ "rhps1" ];
-        "172.16.0.6" = [ "panda6" ];
-        "172.16.1.7" = [ "panda7" ];
-        "192.168.1.2" = [ "panda2" ];
       };
     }
     (lib.mkIf (config.modules.sops.enable && config.modules.networkmanager.profiles.common.enable) {

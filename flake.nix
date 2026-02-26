@@ -5,6 +5,9 @@
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-25.11";
     };
+    nixpkgs-unstable = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
     xwayland-satellite = {
       url = "github:Supreeeme/xwayland-satellite";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,14 +40,6 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      globals = {
-        # this are the variables that you wanna change xd
-        UserName = "arnaud"; 
-        HostName = "arnaud";
-        GitName = "Arnaud TANGUY";
-        GitEmail = "arn.tanguy@gmail.com";
-        Bwserver = "https://vault.arntanguy.fr";
-      };
 
       # Define an overlay to override some packages
       overlays =  [
@@ -77,23 +72,37 @@
       };
     in
     {
-      nixosConfigurations.${globals.HostName} = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."arnaud" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit globals; inherit inputs; };
+        specialArgs = 
+        {
+          inherit inputs; 
+          globals = import ./hosts/dell-precision-work/globals.nix;
+          unstablePkgs = import inputs.nixpkgs-unstable {
+            system = system;
+            config.allowUnfree = true;
+          };
+        };
         modules = [
           ./hosts/dell-precision-work/configuration.nix
           ./modules
-          # ./configuration.nix
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit globals; };
-            home-manager.users.${globals.UserName} = import ./modules/home/home.nix;
-          }
         ];
         pkgs = pkgs; # pass your overlayed pkgs
+      };
+
+      # dell precision 5570 for panda control (old Julien's laptop)
+      nixosConfigurations."lirmm-bamboo" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = 
+        { 
+          inherit inputs; 
+          globals = import ./hosts/lirmm-bamboo/globals.nix;
+        };
+        modules = [
+          ./hosts/lirmm-bamboo/configuration.nix
+          ./modules
+        ];
+        pkgs = pkgs;
       };
     };
 }

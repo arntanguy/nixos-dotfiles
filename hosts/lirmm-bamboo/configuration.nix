@@ -20,6 +20,10 @@
     }
   ];
 
+  # Disable secrets management for this host
+  # also removes networkmanager profiles that depend on a password
+  modules.sops.enable = false;
+
   nix = {
     trustedUsers = [ "root" "${globals.UserName}" ]; # Replace with your actual username
     settings = {
@@ -203,7 +207,7 @@
 
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  networking.firewall.enable = false;
+  networking.firewall.enable = false; # needed by MCFrankaControl
   system.stateVersion = "25.11";
 
 }
