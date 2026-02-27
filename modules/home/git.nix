@@ -15,7 +15,7 @@
       # GPG signing.
       # Export the corresponding public key with gpg --armor --export 5888959633A5715A > yubikey.pub
       commit.gpgSign = true;
-      user.signingKey = "5888959633A5715A";
+      user.signingKey = "64DF9BCBF1C4E40520C8F7C22B2888B308742120";
     };
   };
 }
