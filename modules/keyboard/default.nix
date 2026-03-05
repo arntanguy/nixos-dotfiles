@@ -1,27 +1,16 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, globals, ... }:
 {
   options = {
     modules.keyboard-mods = {
       enable = lib.mkEnableOption "enables keyboard-mods (kmonad, home-row mods, etc)";
-      layout = lib.mkOption {
-        type = lib.types.str;
-        default = "us";
-        description = "Keyboard layout (e.g., 'us', 'fr', 'de').";
-        example = "fr";
-      };
-      variant = lib.mkOption {
-        type = lib.types.str;
-        default = "";
-        description = "Keyboard layout variant (optional).";
-        example = "altgr-intl";
-      };
     };
   };
 
   config = lib.mkIf config.modules.keyboard-mods.enable {
     services.xserver.xkb = {
-      layout = config.modules.keyboard-mods.layout;
-      variant = config.modules.keyboard-mods.variant;
+      layout = "${globals.xkb.layout}";
+      variant = "";
+      options = "${globals.xkb.options}";
      };
 
     environment.systemPackages = with pkgs; [
