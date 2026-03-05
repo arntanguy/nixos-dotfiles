@@ -11,6 +11,7 @@ defaults // {
   EthernetInterface = "enp0s31f6";
   xkb = {
     layout = "us";
+    variant = "";
     options = "grp:win_space_toggle,compose:ralt,ctrl:nocaps";
   };
 }
