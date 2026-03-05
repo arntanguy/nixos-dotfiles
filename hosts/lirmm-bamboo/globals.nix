@@ -9,8 +9,10 @@ defaults // {
   GitEmail = "arn.tanguy@gmail.com";
   Bwserver = "https://vault.arntanguy.fr";
   EthernetInterface = "enp58s0u1u1";
+  terminal = "kitty";
   xkb = {
     layout = "fr";
-    options = "grp:win_space_toggle,compose:ralt,ctrl:nocaps";
+    variant = "latin9";
+    options = "grp:win_space_toggle,ctrl:nocaps";
   };
 }

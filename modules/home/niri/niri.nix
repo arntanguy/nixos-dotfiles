@@ -295,7 +295,7 @@ window-rule {
 //     open-on-workspace "2-brow"
 // }
 // window-rule {
-//     match app-id=r#"ghostty"#
+//     match app-id=r#"${toString globals.terminal}"#
 //     open-maximized true
 //     open-on-workspace "term"
 // }
@@ -327,7 +327,7 @@ spawn-sh-at-startup "waypaper --random"
 // spawn-at-startup "obsidian"
 // spawn-at-startup "spotify"
 // spawn-at-startup "chromium"
-spawn-at-startup "ghostty"
+spawn-at-startup "${toString globals.terminal}"
 spawn-at-startup "sunsetr"
 
 binds {
@@ -342,7 +342,7 @@ binds {
     Mod+W hotkey-overlay-title="toggle waybar" repeat=false { spawn-sh "pkill -SIGUSR1 waybar || waybar"; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open a Terminal " { spawn "ghostty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal " { spawn "${toString globals.terminal}"; }
     Mod+B hotkey-overlay-title="Open a Browser " { spawn "firefox"; }
     Mod+O hotkey-overlay-title="Open a Obsidian " { spawn "obsidian"; }
     Mod+E hotkey-overlay-title="Open a FileManager " { spawn "nautilus"; }

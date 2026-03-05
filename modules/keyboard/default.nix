@@ -10,7 +10,7 @@
   {
     services.xserver.xkb = {
       layout = "${globals.xkb.layout}";
-      variant = "";
+      variant = "${globals.xkb.variant}";
       options = "${globals.xkb.options}";
     };
   }
