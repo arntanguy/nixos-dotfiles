@@ -97,6 +97,10 @@
         { 
           inherit inputs; 
           globals = import ./hosts/lirmm-bamboo/globals.nix;
+          unstablePkgs = import inputs.nixpkgs-unstable {
+            system = system;
+            config.allowUnfree = true;
+          };
         };
         modules = [
           ./hosts/lirmm-bamboo/configuration.nix

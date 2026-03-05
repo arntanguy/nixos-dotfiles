@@ -23,6 +23,8 @@
   # Disable secrets management for this host
   # also removes networkmanager profiles that depend on a password
   modules.sops.enable = false;
+  modules.networkmanager.profiles.lirmm-pandas.enable = true;
+  modules.networkmanager.profiles.lirmm-pandas.ipSuffix = 44;
 
   nix = {
     trustedUsers = [ "root" "${globals.UserName}" ]; # Replace with your actual username
