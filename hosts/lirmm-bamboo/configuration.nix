@@ -25,6 +25,8 @@
   modules.sops.enable = false;
   modules.networkmanager.profiles.lirmm-pandas.enable = true;
   modules.networkmanager.profiles.lirmm-pandas.ipSuffix = 44;
+  modules.keyboard-mods.layout = "fr";
+  modules.keyboard-mods.variant = "";
 
   nix = {
     trustedUsers = [ "root" "${globals.UserName}" ]; # Replace with your actual username
