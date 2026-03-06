@@ -36,7 +36,8 @@
           interfaces.${globals.EthernetInterface} = {
             mtu = 1400; # or even 1280 reduce latency
             # Set custom MAC address if specified
-            mac = lib.mkIf (macAddr != "") macAddr;
+            macAddress = lib.mkIf (macAddr != "") macAddr;
+            useDHCP = true;
             ipv4.addresses = [
               {
                 address = "172.16.0.${ipSuffixStr}";

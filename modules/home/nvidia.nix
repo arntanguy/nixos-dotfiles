@@ -3,7 +3,7 @@
 # This module installs an nv-run script to run any app that honours the __NV_PRIME_RENDER_OFFLOAD variables using the nvidia card
 # It wraps applications that require nvidia GPU to run to use these variables automatically. This works with the desktop entry as well as
 # it overrides the default program executable
-{ pkgs, config, lib, osConfig, ... }:
+{ pkgs, config, globals, lib, osConfig, ... }:
 
 let
   # 1. System-level detection
@@ -49,13 +49,15 @@ in {
     nv-run
     
     # Install the wrapped versions of your apps requiring nvidia card
-    (maybeWrapPrime pkgs.davinci-resolve)
     (maybeWrapPrime pkgs.blender)
     (maybeWrapPrime pkgs.meshlab)
     (maybeWrapPrime pkgs.darktable)
+    (maybeWrapPrime pkgs.colmap) # structure from motion, photogrametry
     (maybeWrapPrime pkgs.vlc)
     (maybeWrapPrime pkgs.totem) # mostly for totem-video-thumbnailer for nautilus
     # 3D printing
     (maybeWrapPrime pkgs.prusa-slicer)
-  ];
+  ] ++
+    lib.optional globals.enableDavinciResolve (maybeWrapPrime pkgs.davinci-resolve)
+  ;
 }

@@ -25,6 +25,8 @@
   modules.sops.enable = false;
   modules.networkmanager.profiles.lirmm-pandas.enable = true;
   modules.networkmanager.profiles.lirmm-pandas.ipSuffix = 45;
+  # FIXME: override default mac address with a recognized one
+  modules.networkmanager.profiles.lirmm-pandas.macAddress = "34:48:ed:7e:e4:70";
   modules.keyboard-mods.enable = false;
 
   nix = {
@@ -59,16 +61,17 @@
   boot.loader = {
     systemd-boot.enable = false;
     grub.enable = true;
-    grub.device = "nodev";
+    grub.device = "/dev/sdb"; # Replace with your actual disk (not partition)
     grub.theme = pkgs.fetchFromGitHub {
       owner = "shvchk";
       repo = "fallout-grub-theme";
       rev = "80734103d0b48d724f0928e8082b6755bd3b2078";
       sha256 = "sha256-7kvLfD6Nz4cEMrmCA9yq4enyqVyqiTkVZV5y4RyUatU=";
     };
-    grub.efiSupport = true;
+    grub.efiSupport = false;
     grub.useOSProber = true;
-    efi.canTouchEfiVariables = true;
+    # Remove or comment out efi.canTouchEfiVariables
+    # efi.canTouchEfiVariables = true;
   };
   boot = {
     kernelPackages = pkgs.linuxPackages;
@@ -117,7 +120,7 @@
     ghostty
     gimp
     godot
-    krita
+    # krita
     obs-studio
     papirus-icon-theme
     pavucontrol
@@ -131,10 +134,8 @@
     # Security & Networking
     openvpn
     polkit
-    qbittorrent
+    # qbittorrent
     sqlmap
-    steam
-    steam-run
     wireshark
     wordlists
 
@@ -184,13 +185,6 @@
     wireshark.enable = true;
     firefox.enable = true;
 
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-    };
-
-    gamemode.enable = true;
     direnv.enable = true;
   };
   security.polkit.enable = true;

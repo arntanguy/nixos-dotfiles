@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   globals,
   ...
@@ -8,21 +9,20 @@
 {
   home.stateVersion = "25.11";
 
-  imports = [
-    ./waybar/waybar.nix
-    ./niri/niri.nix
-    ./bash.nix
-    ./fuzzel/fuzzel.nix
-    ./tmux.nix
-    # ./nvim.nix
-    ./ghostty.nix
-    ./git.nix
-    ./scripts/scripts.nix
-    ./nvidia.nix
-    ./ssh/ssh.nix
-    ./email.nix
-    # ./davinci-resolve.nix
-  ];
+  imports = []
+    ++ lib.optional globals.enableWaybar ./waybar/waybar.nix
+    ++ lib.optional globals.enableNiri ./niri/niri.nix
+    ++ lib.optional globals.enableBash ./bash.nix
+    ++ lib.optional globals.enableFuzzel ./fuzzel/fuzzel.nix
+    ++ lib.optional globals.enableTmux ./tmux.nix
+    # ++ lib.optional globals.enableNvim ./nvim.nix
+    ++ lib.optional globals.enableGhostty ./ghostty.nix
+    ++ lib.optional globals.enableGit ./git.nix
+    ++ lib.optional globals.enableScripts ./scripts/scripts.nix
+    ++ lib.optional globals.enableNvidia ./nvidia.nix
+    ++ lib.optional globals.enableSsh ./ssh/ssh.nix
+    ++ lib.optional globals.enableEmail ./email.nix;
+    # ++ lib.optional globals.enableDavinciResolve ./davinci-resolve.nix;
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {

@@ -15,4 +15,18 @@ defaults // {
     variant = "latin9";
     options = "grp:win_space_toggle,ctrl:nocaps";
   };
+
+  enableWaybar = true;
+  enableNiri = true;
+  enableBash = true;
+  enableFuzzel = true;
+  enableTmux = true;
+  enableNvim = true;
+  enableGhostty = true;
+  enableGit = true;
+  enableScripts = true;
+  enableNvidia = true;
+  enableSsh = true;
+  enableEmail = false;
+  enableDavinciResolve = false;
 }

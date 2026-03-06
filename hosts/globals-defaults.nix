@@ -11,4 +11,18 @@
     variant = "";
     options = "grp:win_space_toggle,compose:ralt,ctrl:nocaps";
   };
+
+  enableWaybar = true;
+  enableNiri = true;
+  enableBash = true;
+  enableFuzzel = true;
+  enableTmux = true;
+  enableNvim = true;
+  enableGhostty = true;
+  enableGit = true;
+  enableScripts = true;
+  enableNvidia = true;
+  enableSsh = true;
+  enableEmail = true;
+  enableDavinciResolve = true;
 }
