@@ -108,5 +108,24 @@
         ];
         pkgs = pkgs;
       };
+
+      # alienware for panda control 
+      nixosConfigurations."rob-alienware" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = 
+        { 
+          inherit inputs; 
+          globals = import ./hosts/rob-alienware/globals.nix;
+          unstablePkgs = import inputs.nixpkgs-unstable {
+            system = system;
+            config.allowUnfree = true;
+          };
+        };
+        modules = [
+          ./hosts/rob-alienware/configuration.nix
+          ./modules
+        ];
+        pkgs = pkgs;
+      };
     };
 }

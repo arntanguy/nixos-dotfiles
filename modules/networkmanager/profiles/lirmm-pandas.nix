@@ -10,6 +10,12 @@
         description = "Last octet of the local IP address for panda profile.";
         example = 99;
       };
+      macAddress = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Custom MAC address for panda profile (leave empty for default).";
+        example = "00:11:22:33:44:55";
+      };
     };
   };
 
@@ -24,9 +30,13 @@
     (lib.mkIf config.modules.networkmanager.profiles.lirmm-pandas.enable
       (let
         ipSuffixStr = toString config.modules.networkmanager.profiles.lirmm-pandas.ipSuffix;
+        macAddr = config.modules.networkmanager.profiles.lirmm-pandas.macAddress;
       in {
         networking = {
           interfaces.${globals.EthernetInterface} = {
+            mtu = 1400; # or even 1280 reduce latency
+            # Set custom MAC address if specified
+            mac = lib.mkIf (macAddr != "") macAddr;
             ipv4.addresses = [
               {
                 address = "172.16.0.${ipSuffixStr}";
