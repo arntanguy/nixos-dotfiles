@@ -25,7 +25,7 @@
     # avahi enables resolution of *.local hostnames
     services.avahi = { #
       enable = true;
-      nssmdns = true; # This adds mdns to /etc/nsswitch.conf for hosts
+      nssmdns4 = true; # This adds mdns to /etc/nsswitch.conf for hosts
       openFirewall = true; # Optional: open mDNS port in firewall
     };
   };

@@ -24,8 +24,8 @@
   modules.networkmanager.profiles.lirmm-pandas.macAddress = "34:48:ed:7e:e4:70";
 
   nix = {
-    trustedUsers = [ "root" "${globals.UserName}" ]; # Replace with your actual username
     settings = {
+      trusted-users = [ "root" "${globals.UserName}" ]; # Replace with your actual username
       substituters = [
         "https://cache.nixos.org/"
         "https://mc-rtc-nix.cachix.org"
@@ -77,7 +77,7 @@
   services.openssh = {
     enable = true;
     # Optional: allow password authentication (default is false)
-    passwordAuthentication = true;
+    settings.PasswordAuthentication = true;
     # Optional: allow root login (default is "prohibit-password")
     # permitRootLogin = "no";
     # Optional: open the firewall for SSH
@@ -147,7 +147,7 @@
     # Misc
     fuzzel
     grub2
-    swww
+    awww
     wlogout
   ];
 

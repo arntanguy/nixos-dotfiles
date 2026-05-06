@@ -7,7 +7,7 @@
 }:
 
 {
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 
   imports = []
     ++ lib.optional globals.enableWaybar ./waybar/waybar.nix
@@ -60,7 +60,7 @@
 
   };
 
-  services.swww.enable = true;
+  services.awww.enable = true;
   services.swaync.enable = true;
 
 }

@@ -30,8 +30,8 @@
   modules.keyboard-mods.enable = false;
 
   nix = {
-    trustedUsers = [ "root" "${globals.UserName}" ]; # Replace with your actual username
     settings = {
+      trusted-users = [ "root" "${globals.UserName}" ]; # Replace with your actual username
       substituters = [
         "https://cache.nixos.org/"
         "https://mc-rtc-nix.cachix.org"
@@ -153,7 +153,7 @@
     # Misc
     fuzzel
     grub2
-    swww
+    awww
     wlogout
   ];
 

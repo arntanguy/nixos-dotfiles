@@ -3,14 +3,7 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-25.11";
-    };
-    nixpkgs-unstable = {
       url = "github:nixos/nixpkgs/nixos-unstable";
-    };
-    xwayland-satellite = {
-      url = "github:Supreeeme/xwayland-satellite";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
         url = "github:nix-community/home-manager";
@@ -44,9 +37,6 @@
       # Define an overlay to override some packages
       overlays =  [
         (final: prev: {
-          # see https://github.com/Supreeeme/xwayland-satellite/issues/210
-          # This fixes drag and drop issues in Niri + xwayland-satellite, in particular in davinci resolve
-          xwayland-satellite = inputs.xwayland-satellite.packages.${system}.default;
           # FIXME: this overlay is done to force-enable google-accounts support in gvfs, which is required for google-drive support in nautilus.
           # This is necessary for nixos 25.11, as google account support is disabled by default as there are security vulnerabilities
           # in libsoup. see https://github.com/NixOS/nixpkgs/issues/438121
@@ -78,10 +68,6 @@
         {
           inherit inputs; 
           globals = import ./hosts/dell-precision-work/globals.nix;
-          unstablePkgs = import inputs.nixpkgs-unstable {
-            system = system;
-            config.allowUnfree = true;
-          };
         };
         modules = [
           ./hosts/dell-precision-work/configuration.nix
@@ -97,10 +83,6 @@
         { 
           inherit inputs; 
           globals = import ./hosts/lirmm-bamboo/globals.nix;
-          unstablePkgs = import inputs.nixpkgs-unstable {
-            system = system;
-            config.allowUnfree = true;
-          };
         };
         modules = [
           ./hosts/lirmm-bamboo/configuration.nix
@@ -116,10 +98,6 @@
         { 
           inherit inputs; 
           globals = import ./hosts/rob-alienware/globals.nix;
-          unstablePkgs = import inputs.nixpkgs-unstable {
-            system = system;
-            config.allowUnfree = true;
-          };
         };
         modules = [
           ./hosts/rob-alienware/configuration.nix

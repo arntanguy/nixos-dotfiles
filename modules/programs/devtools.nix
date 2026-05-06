@@ -25,7 +25,7 @@
       devpod
       docker
       docker-compose
-      nixfmt-rfc-style
+      nixfmt
       nurl # Generate Nix Fetcher calls from repository URLs
       cachix
       attic-client

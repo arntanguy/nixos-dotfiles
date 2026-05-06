@@ -11,6 +11,7 @@ in
     force = true;
   };
   programs.ssh = {
+    enableDefaultConfig = false;
     enable = true;
   };
 }
