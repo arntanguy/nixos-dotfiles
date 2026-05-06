@@ -18,6 +18,7 @@
     # ++ lib.optional globals.enableNvim ./nvim.nix
     ++ lib.optional globals.enableGhostty ./ghostty.nix
     ++ lib.optional globals.enableGit ./git.nix
+    ++ lib.optional globals.enableGit ./lazygit/lazygit.nix
     ++ lib.optional globals.enableScripts ./scripts/scripts.nix
     ++ lib.optional globals.enableNvidia ./nvidia.nix
     ++ lib.optional globals.enableSsh ./ssh/ssh.nix

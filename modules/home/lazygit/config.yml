@@ -1,0 +1,5 @@
+git:
+  # If true, do not spawn a separate process when using GPG
+  overrideGpg: true 
+  autoFetch: false
+  autoRefresh: false

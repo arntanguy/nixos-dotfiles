@@ -16,7 +16,6 @@
       go
       gopls
       lazydocker
-      lazygit
       musl
       pre-commit
       prek
@@ -28,6 +27,7 @@
       nixfmt-rfc-style
       nurl # Generate Nix Fetcher calls from repository URLs
       cachix
+      attic-client
     ];
   };
 }

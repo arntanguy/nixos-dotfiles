@@ -8,7 +8,10 @@ defaults // {
   GitName = "Arnaud TANGUY";
   GitEmail = "arn.tanguy@gmail.com";
   Bwserver = "https://vault.arntanguy.fr";
+  # When plugged to the ethernet port
   EthernetInterface = "enp0s31f6";
+  # when plugged over usb-c
+  # EthernetInterface = "enp78s0";
   xkb = {
     layout = "us";
     variant = "";
