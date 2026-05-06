@@ -10,6 +10,7 @@
       # Development Tools
       cmakeCurses
       gcc
+      ccache
       gh # github cli
       git
       gnumake
