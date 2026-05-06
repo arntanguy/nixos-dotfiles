@@ -20,6 +20,7 @@
       starship
       tmux
       wget
+      dua # disk usage analyzer
       # Nix/NixOS Tools
       nh
       imagemagick
