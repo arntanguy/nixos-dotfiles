@@ -3,8 +3,13 @@
 {
   home.packages = with pkgs; [
     sunsetr
-    brightnessctl
+    noctalia-shell
   ];
+
+  # networking.networkmanager.enable = true;
+  # hardware.bluetooth.enable = true;
+  # services.power-profiles-daemon.enable = true;
+  # services.upower.enable = true;
 
   xdg.configFile."swaylock/config".source = ./mocha.conf;
   home.file.".local/bin/nws.sh".source = ./nws.sh;
@@ -235,8 +240,26 @@ animations {
     // slowdown 3.0
 }
 
+// default window opacity is a 95%
 window-rule {
-  opacity 0.65
+  opacity 0.9
+  background-effect {
+    blur true
+    xray false
+  }
+}
+/* Noctalia: blur everywhere without xray for a better look */
+layer-rule {
+  match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"
+  background-effect {
+    xray false
+  }
+}
+
+// firefox has no transparency
+/-window-rule {
+    match app-id="firefox"
+    opacity 1.0
 }
 
 window-rule {
@@ -319,7 +342,7 @@ window-rule {
 
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
+spawn-at-startup "noctalia-shell"
 // spawn-at-startup "bitwarden"
 spawn-sh-at-startup "waypaper --random"
 // spawn-at-startup "obs"
@@ -339,37 +362,45 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Shift+O hotkey-overlay-title="toggle opacity" { toggle-window-rule-opacity; }
 
-    Mod+W hotkey-overlay-title="toggle waybar" repeat=false { spawn-sh "pkill -SIGUSR1 waybar || waybar"; }
+    // Mod+W hotkey-overlay-title="toggle waybar" repeat=false { spawn-sh "pkill -SIGUSR1 waybar || waybar"; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal " { spawn "${toString globals.terminal}"; }
     Mod+B hotkey-overlay-title="Open a Browser " { spawn "firefox"; }
     Mod+O hotkey-overlay-title="Open a Obsidian " { spawn "obsidian"; }
     Mod+E hotkey-overlay-title="Open a FileManager " { spawn "nautilus"; }
-    Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "fuzzel"; }
     Super+Shift+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock -f -S --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color bb00cc --key-hl-color 880033 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --fade-in 0.2"; }
+
+    /* Noctalia shell */
+    Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
+    Mod+S { spawn-sh "noctalia-shell ipc call controlCenter toggle"; }
+    Mod+Comma { spawn-sh "noctalia-shell ipc call settings toggle"; }
+
+    // Audio & Brightness
+    XF86AudioRaiseVolume { spawn-sh "noctalia-shell ipc call volume increase"; }
+    XF86AudioLowerVolume { spawn-sh "noctalia-shell ipc call volume decrease"; }
+    XF86AudioMute { spawn-sh "noctalia-shell ipc call volume muteOutput"; }
+    XF86MonBrightnessUp { spawn-sh "noctalia-shell ipc call brightness increase"; }
+    XF86MonBrightnessDown { spawn-sh "noctalia-shell ipc call brightness decrease"; }
+    /* End noctalia-shell */
+
+
+
+    // Example volume keys mappings for PipeWire & WirePlumber.
+    // The allow-when-locked=true property makes them work even when the session is locked.
+    // Using spawn-sh allows to pass multiple arguments together with the command.
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
     // For example, this is a standard bind to toggle the screen reader (orca).
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
-    // Example volume keys mappings for PipeWire & WirePlumber.
-    // The allow-when-locked=true property makes them work even when the session is locked.
-    // Using spawn-sh allows to pass multiple arguments together with the command.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-
     // Media control keys using playerctl
     XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
     XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
     XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
     XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
     Mod+TAB repeat=false { toggle-overview; }
     // custom window selector with dmenu TODO
@@ -504,9 +535,9 @@ binds {
     Mod+BracketRight { consume-or-expel-window-right; }
 
     // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
+    // Mod+Comma  { consume-window-into-column; }
     // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    // Mod+Period { expel-window-from-column; }
 
     Mod+R { switch-preset-column-width; }
     // Cycling through the presets in reverse order is also possible.

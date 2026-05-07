@@ -1,6 +1,7 @@
 { pkgs, lib, config, ... }:
 {
   imports = [
+    ./laptop.nix
     ./yubikey.nix
     ./sops.nix
     ./nautilus.nix
@@ -10,6 +11,7 @@
     ./programs
   ];
 
+  modules.laptop.enable = lib.mkDefault true;
   modules.yubikey.enable = lib.mkDefault true;
   # Disabling sops will make some other features such as some modules.networkmanager.profiles unavailable
   modules.sops.enable = lib.mkDefault true;
