@@ -112,7 +112,6 @@
     ffmpeg
     ghostty
     gimp
-    godot
     krita
     obs-studio
     papirus-icon-theme
