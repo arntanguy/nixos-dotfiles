@@ -17,6 +17,7 @@
       # secrets are available as root in /run/secrets/<path> by default
       secrets = {
           "data/networking/wifi/LIRMM"= { };
+          "data/networking/wifi/EDUROAM"= { };
           # XXX: Needed to enable nix build to fetch private repositories
           "data/github/NIX_GH_REPO_TOKEN"= { };
       };

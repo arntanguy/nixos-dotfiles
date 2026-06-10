@@ -21,7 +21,10 @@
          # Note: secrets are available as files at runtime decripted by sops (in /run/secrets)
          # Set key-value pairs in secrets.yaml, and use the generated file as an environmentFiles entry for network manager. Secrets are then available as variables $SECRET_NAME in network profiles.
          ensureProfiles = {
-                environmentFiles = [ config.sops.secrets."data/networking/wifi/LIRMM".path ];
+                environmentFiles = [
+                  config.sops.secrets."data/networking/wifi/LIRMM".path 
+                  config.sops.secrets."data/networking/wifi/EDUROAM".path 
+                ];
                 profiles = {
                     LIRMM = {
                       connection = {
@@ -40,6 +43,26 @@
                         eap = "peap";
                         identity = "$LIRMM_USER"; 
                         password = "$LIRMM_PASSWORD";
+                        phase2-auth = "mschapv2";
+                      };
+                    };
+                    eduroam = {
+                      connection = {
+                        id = "eduroam";
+                        type = "wifi";
+                        autoconnect = true;
+                      };
+                      wifi = {
+                        mode = "infrastructure";
+                        ssid = "eduroam";
+                      };
+                      wifi-security = {
+                        key-mgmt = "wpa-eap";
+                      };
+                      "802-1x" = {
+                        eap = "peap";
+                        identity = "$EDUROAM_USER"; 
+                        password = "$EDUROAM_PASSWORD";
                         phase2-auth = "mschapv2";
                       };
                     };
