@@ -25,6 +25,7 @@
         "172.16.0.6" = [ "panda6" ];
         "172.16.1.7" = [ "panda7" ];
         "192.168.1.2" = [ "panda2" ];
+        "172.16.0.1" = [ "panda_ganesh" ];
       };
     }
     (lib.mkIf config.modules.networkmanager.profiles.lirmm-pandas.enable
@@ -37,7 +38,7 @@
             mtu = 1400; # or even 1280 reduce latency
             # Set custom MAC address if specified
             macAddress = lib.mkIf (macAddr != "") macAddr;
-            useDHCP = true;
+            useDHCP = false;
             ipv4.addresses = [
               {
                 address = "172.16.0.${ipSuffixStr}";
