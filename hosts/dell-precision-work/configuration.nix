@@ -25,8 +25,11 @@
 
   nix = {
     settings = {
-      trusted-users = [ "root" "${globals.UserName}" ]; 
-      
+      trusted-users = [
+        "root"
+        "${globals.UserName}"
+      ];
+
       substituters = [
         "https://cache.nixos.org"
         "https://gepetto.cachix.org"
@@ -34,7 +37,7 @@
         "https://ros.cachix.org"
         "https://attic.iid.ciirc.cvut.cz/ros" # <-- Added globally
       ];
-      
+
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "mc-rtc-nix.cachix.org-1:5M3sLvHXJCep4wc1tQl7QuFWL2eH2I0jkuvWtqJDYQs="
@@ -43,7 +46,7 @@
         "ros:JR95vUYsShSqfA1VTYoFt1Nz6uXasm5QrcOsGry9f6Q=" # <-- Added globally
       ];
     };
-  
+
     gc = {
       automatic = true;
       dates = "weekly";

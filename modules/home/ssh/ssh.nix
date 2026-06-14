@@ -1,4 +1,9 @@
-{ pkgs, config, globals, ... }:
+{
+  pkgs,
+  config,
+  globals,
+  ...
+}:
 
 let
   pubkeySource = ../../../hosts/common/users/arnaud/keys/yubikey.pub;

@@ -1,8 +1,13 @@
-{ pkgs, lib, config, inputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
 {
   options = {
-    modules.programs.devtools.enable =
-      lib.mkEnableOption "enables devtools";
+    modules.programs.devtools.enable = lib.mkEnableOption "enables devtools";
   };
 
   config = lib.mkIf config.modules.programs.devtools.enable {

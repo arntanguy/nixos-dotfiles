@@ -1,4 +1,5 @@
-{ inputs, config,... }: {
+{ inputs, config, ... }:
+{
   accounts.email = {
     accounts."arn.tanguy@gmail.com" = {
       thunderbird.enable = true;
@@ -57,7 +58,7 @@
       # No passwordCommand!
       signature = {
         text = ''
-        Groupe Promotion Alpinisme FFCAM MAGH (Montagne Alpinisme Groupe Herault)
+          Groupe Promotion Alpinisme FFCAM MAGH (Montagne Alpinisme Groupe Herault)
         '';
         showSignature = "append";
       };

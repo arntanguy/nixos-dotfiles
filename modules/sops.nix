@@ -1,8 +1,13 @@
-{ pkgs, lib, config, globals, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  globals,
+  ...
+}:
 {
   options = {
-    modules.sops.enable = 
-      lib.mkEnableOption "enables sops secret management";
+    modules.sops.enable = lib.mkEnableOption "enables sops secret management";
   };
 
   config = lib.mkIf config.modules.sops.enable {
@@ -16,10 +21,10 @@
       defaultSopsFormat = "yaml";
       # secrets are available as root in /run/secrets/<path> by default
       secrets = {
-          "data/networking/wifi/LIRMM"= { };
-          "data/networking/wifi/EDUROAM"= { };
-          # XXX: Needed to enable nix build to fetch private repositories
-          "data/github/NIX_GH_REPO_TOKEN"= { };
+        "data/networking/wifi/LIRMM" = { };
+        "data/networking/wifi/EDUROAM" = { };
+        # XXX: Needed to enable nix build to fetch private repositories
+        "data/github/NIX_GH_REPO_TOKEN" = { };
       };
     };
 

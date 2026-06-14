@@ -1,8 +1,12 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   options = {
-    modules.yubikey.enable = 
-      lib.mkEnableOption "enables yubikey";
+    modules.yubikey.enable = lib.mkEnableOption "enables yubikey";
   };
 
   config = lib.mkIf config.modules.yubikey.enable {
@@ -41,7 +45,7 @@
       enable = true;
       enableSSHSupport = true;
       # Pick a flavor: "curses" for terminal, "qt" or "gnome3" for GUI
-      pinentryPackage = pkgs.pinentry-rofi; 
+      pinentryPackage = pkgs.pinentry-rofi;
     };
     # Disable ssh-agent in favor of gpg-agent
     # ssh-add keeps working as usual (as long as SSH_AUTH_SOCK is set to the gpg-agent, which the gnupg module does)

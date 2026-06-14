@@ -1,4 +1,10 @@
-{ pkgs, lib, config, globals, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  globals,
+  ...
+}:
 {
   options = {
     modules.keyboard-mods = {
@@ -7,35 +13,35 @@
   };
 
   config = lib.mkMerge [
-  {
-    services.xserver.xkb = {
-      layout = "${globals.xkb.layout}";
-      variant = "${globals.xkb.variant}";
-      options = "${globals.xkb.options}";
-    };
-  }
-  (lib.mkIf config.modules.keyboard-mods.enable {
+    {
+      services.xserver.xkb = {
+        layout = "${globals.xkb.layout}";
+        variant = "${globals.xkb.variant}";
+        options = "${globals.xkb.options}";
+      };
+    }
+    (lib.mkIf config.modules.keyboard-mods.enable {
 
-   environment.systemPackages = with pkgs; [
-   kmonad
-   ];
+      environment.systemPackages = with pkgs; [
+        kmonad
+      ];
 
-# home-row mods
-# see https://precondition.github.io/home-row-mods
-   services.kmonad = {
-   enable = true;
-   keyboards = {
-   myKMonadOutput = {
-   defcfg = {
-   enable = true;
-   fallthrough = true;
-   };
-# XXX how to configure per-host?
-   device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
-   config = builtins.readFile ./kmonad/config.kbd;
-   };
-   };
-   };
-  })
+      # home-row mods
+      # see https://precondition.github.io/home-row-mods
+      services.kmonad = {
+        enable = true;
+        keyboards = {
+          myKMonadOutput = {
+            defcfg = {
+              enable = true;
+              fallthrough = true;
+            };
+            # XXX how to configure per-host?
+            device = "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+            config = builtins.readFile ./kmonad/config.kbd;
+          };
+        };
+      };
+    })
   ];
 }

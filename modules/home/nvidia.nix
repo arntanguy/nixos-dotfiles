@@ -3,7 +3,14 @@
 # This module installs an nv-run script to run any app that honours the __NV_PRIME_RENDER_OFFLOAD variables using the nvidia card
 # It wraps applications that require nvidia GPU to run to use these variables automatically. This works with the desktop entry as well as
 # it overrides the default program executable
-{ pkgs, config, globals, lib, osConfig, ... }:
+{
+  pkgs,
+  config,
+  globals,
+  lib,
+  osConfig,
+  ...
+}:
 
 let
   # 1. System-level detection
@@ -21,33 +28,39 @@ let
   # 3. Create 'nv-run' as a standalone package
   # If no Nvidia is found, it just acts as a passthrough ('exec $@')
   nv-run = pkgs.writeShellScriptBin "nv-run" (
-    if isNvidiaSystem then ''
-      ${lib.concatStringsSep "\n" (lib.mapAttrsToList (n: v: "export ${n}=${v}") nvidiaEnv)}
-      exec "$@"
-    '' else ''
-      exec "$@"
-    ''
+    if isNvidiaSystem then
+      ''
+        ${lib.concatStringsSep "\n" (lib.mapAttrsToList (n: v: "export ${n}=${v}") nvidiaEnv)}
+        exec "$@"
+      ''
+    else
+      ''
+        exec "$@"
+      ''
   );
 
   # 4. Conditional wrapper function for specific apps
-  maybeWrapPrime = pkg: 
-    if isNvidiaSystem 
-    then (pkgs.symlinkJoin {
-      name = "${pkg.pname or pkg.name}-wrapped-prime";
-      paths = [ pkg ];
-      nativeBuildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/${pkg.pname or pkg.name} \
-          ${lib.concatStringsSep " " (lib.mapAttrsToList (name: value: "--set ${name} ${value}") nvidiaEnv)}
-      '';
-    })
-    else pkg;
+  maybeWrapPrime =
+    pkg:
+    if isNvidiaSystem then
+      (pkgs.symlinkJoin {
+        name = "${pkg.pname or pkg.name}-wrapped-prime";
+        paths = [ pkg ];
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/${pkg.pname or pkg.name} \
+            ${lib.concatStringsSep " " (lib.mapAttrsToList (name: value: "--set ${name} ${value}") nvidiaEnv)}
+        '';
+      })
+    else
+      pkg;
 
-in {
+in
+{
   home.packages = [
     # Install the standalone utility
     nv-run
-    
+
     # Install the wrapped versions of your apps requiring nvidia card
     (maybeWrapPrime pkgs.blender)
     (maybeWrapPrime pkgs.meshlab)
@@ -57,7 +70,6 @@ in {
     (maybeWrapPrime pkgs.totem) # mostly for totem-video-thumbnailer for nautilus
     # 3D printing
     (maybeWrapPrime pkgs.prusa-slicer)
-  ] ++
-    lib.optional globals.enableDavinciResolve (maybeWrapPrime pkgs.davinci-resolve)
-  ;
+  ]
+  ++ lib.optional globals.enableDavinciResolve (maybeWrapPrime pkgs.davinci-resolve);
 }

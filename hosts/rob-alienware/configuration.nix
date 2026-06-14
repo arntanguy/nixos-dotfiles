@@ -31,7 +31,10 @@
 
   nix = {
     settings = {
-      trusted-users = [ "root" "${globals.UserName}" ]; # Replace with your actual username
+      trusted-users = [
+        "root"
+        "${globals.UserName}"
+      ]; # Replace with your actual username
       substituters = [
         "https://cache.nixos.org/"
         "https://mc-rtc-nix.cachix.org"

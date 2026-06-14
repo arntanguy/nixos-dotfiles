@@ -6,11 +6,16 @@
 # in libsoup. see https://github.com/NixOS/nixpkgs/issues/438121
 # It is forced to be enabled in flake.nix nixpkgs' overlay.
 
-{ pkgs, lib, config, globals, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  globals,
+  ...
+}:
 {
   options = {
-    modules.nautilus.enable = 
-      lib.mkEnableOption "enables nautilus and gfvs integration";
+    modules.nautilus.enable = lib.mkEnableOption "enables nautilus and gfvs integration";
   };
 
   config = lib.mkIf config.modules.nautilus.enable {

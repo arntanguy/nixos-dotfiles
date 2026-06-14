@@ -1,4 +1,10 @@
-{ pkgs, lib, config, globals, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  globals,
+  ...
+}:
 {
   imports = [
     ./profiles/common.nix
@@ -6,8 +12,7 @@
   ];
 
   options = {
-    modules.networkmanager.enable = 
-      lib.mkEnableOption "enables networkmanager";
+    modules.networkmanager.enable = lib.mkEnableOption "enables networkmanager";
   };
 
   config = lib.mkIf config.modules.networkmanager.enable {
@@ -15,7 +20,7 @@
       hostName = globals.HostName;
 
       networkmanager = {
-       enable = true;
+        enable = true;
       };
 
     };
@@ -23,7 +28,7 @@
     modules.networkmanager.profiles.lirmm-pandas.enable = lib.mkDefault true;
 
     # avahi enables resolution of *.local hostnames
-    services.avahi = { #
+    services.avahi = {
       enable = true;
       nssmdns4 = true; # This adds mdns to /etc/nsswitch.conf for hosts
       openFirewall = true; # Optional: open mDNS port in firewall

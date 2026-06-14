@@ -1,8 +1,12 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   options = {
-    modules.programs.office.enable = 
-      lib.mkEnableOption "enables office apps (pdf, libreoffice, etc)";
+    modules.programs.office.enable = lib.mkEnableOption "enables office apps (pdf, libreoffice, etc)";
   };
 
   config = lib.mkIf config.modules.programs.office.enable {

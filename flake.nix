@@ -6,8 +6,8 @@
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
     home-manager = {
-        url = "github:nix-community/home-manager";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixCats = {
@@ -24,14 +24,19 @@
 
     # secrets management
     sops-nix = {
-        url = "github:Mic92/sops-nix";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Treefmt framework integration
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   # See https://birdeehub.github.io/nix-wrapper-modules/md/getting-started.html
   inputs.wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
   inputs.wrappers.inputs.nixpkgs.follows = "nixpkgs";
-
 
   outputs =
     {
@@ -39,24 +44,27 @@
       home-manager,
       sops-nix,
       wrappers,
+      treefmt-nix,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
 
       # Define an overlay to override some packages
-      overlays =  [
+      overlays = [
         (final: prev: {
           # FIXME: this overlay is done to force-enable google-accounts support in gvfs, which is required for google-drive support in nautilus.
           # This is necessary for nixos 25.11, as google account support is disabled by default as there are security vulnerabilities
           # in libsoup. see https://github.com/NixOS/nixpkgs/issues/438121
           # required by modules/nautilus.nix
-          gnome = prev.gnome.overrideScope (gfinal: gprev: {
-            gvfs = gprev.gvfs.override {
-              googleSupport = true;
-              gnomeSupport = true;
-            };
-          });
+          gnome = prev.gnome.overrideScope (
+            gfinal: gprev: {
+              gvfs = gprev.gvfs.override {
+                googleSupport = true;
+                gnomeSupport = true;
+              };
+            }
+          );
         })
       ];
       # define a new package set replacing nixpkgs input with the overlayed nixpkgs set
@@ -66,17 +74,25 @@
           allowUnfree = true;
           permittedInsecurePackages = [
             # Required by gnome.gvfs.googleSupport in nixkpgs overlay
-            "libsoup-2.74.3" 
+            "libsoup-2.74.3"
           ];
         };
+      };
+
+      # Configure treefmt eval for your system
+      treefmtEval = treefmt-nix.lib.evalModule pkgs {
+        projectRootFile = "flake.nix";
+
+        # Configure the formatters you want to use
+        programs.nixfmt.enable = true; # Formatter for Nix files
+        programs.mdformat.enable = true; # Formatter for Markdown files
       };
     in
     {
       nixosConfigurations."arnaud" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = 
-        {
-          inherit inputs; 
+        specialArgs = {
+          inherit inputs;
           globals = import ./hosts/dell-precision-work/globals.nix;
         };
         modules = [
@@ -89,9 +105,8 @@
       # dell precision 5570 for panda control (old Julien's laptop)
       nixosConfigurations."lirmm-bamboo" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = 
-        { 
-          inherit inputs; 
+        specialArgs = {
+          inherit inputs;
           globals = import ./hosts/lirmm-bamboo/globals.nix;
         };
         modules = [
@@ -101,12 +116,11 @@
         pkgs = pkgs;
       };
 
-      # alienware for panda control 
+      # alienware for panda control
       nixosConfigurations."rob-alienware" = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = 
-        { 
-          inherit inputs; 
+        specialArgs = {
+          inherit inputs;
           globals = import ./hosts/rob-alienware/globals.nix;
         };
         modules = [
@@ -115,5 +129,8 @@
         ];
         pkgs = pkgs;
       };
+
+      # Expose the formatter wrapper to the flake outputs
+      formatter.${system} = treefmtEval.config.build.wrapper;
     };
 }

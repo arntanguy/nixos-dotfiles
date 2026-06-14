@@ -1,9 +1,10 @@
 let
   defaults = import ../globals-defaults.nix;
 in
-defaults // {
+defaults
+// {
   # this are the variables that you wanna change
-  UserName = "panda"; 
+  UserName = "panda";
   HostName = "bamboo";
   GitName = "Arnaud TANGUY";
   GitEmail = "arn.tanguy@gmail.com";

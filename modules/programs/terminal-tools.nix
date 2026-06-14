@@ -1,8 +1,12 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   options = {
-    modules.programs.terminal-tools.enable = 
-      lib.mkEnableOption "enables terminal apps (unzip, tmux, etc)";
+    modules.programs.terminal-tools.enable = lib.mkEnableOption "enables terminal apps (unzip, tmux, etc)";
   };
 
   config = lib.mkIf config.modules.programs.terminal-tools.enable {

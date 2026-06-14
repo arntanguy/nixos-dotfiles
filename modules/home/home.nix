@@ -9,7 +9,8 @@
 {
   home.stateVersion = "26.05";
 
-  imports = []
+  imports =
+    [ ]
     ++ lib.optional globals.enableWaybar ./waybar/waybar.nix
     ++ lib.optional globals.enableNiri ./niri/niri.nix
     ++ lib.optional globals.enableBash ./bash.nix
@@ -22,7 +23,7 @@
     ++ lib.optional globals.enableNvidia ./nvidia.nix
     ++ lib.optional globals.enableSsh ./ssh/ssh.nix
     ++ lib.optional globals.enableEmail ./email.nix;
-    # ++ lib.optional globals.enableDavinciResolve ./davinci-resolve.nix;
+  # ++ lib.optional globals.enableDavinciResolve ./davinci-resolve.nix;
 
   dconf.settings = {
     "org/gnome/desktop/interface" = {

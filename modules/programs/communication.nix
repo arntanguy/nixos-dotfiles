@@ -1,8 +1,12 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   options = {
-    modules.programs.communication.enable = 
-      lib.mkEnableOption "enables communication apps (matrix, slack, etc)";
+    modules.programs.communication.enable = lib.mkEnableOption "enables communication apps (matrix, slack, etc)";
   };
 
   config = lib.mkIf config.modules.programs.communication.enable {

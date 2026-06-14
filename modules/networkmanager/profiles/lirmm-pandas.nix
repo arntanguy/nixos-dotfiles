@@ -1,9 +1,14 @@
-{ pkgs, lib, config, globals, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  globals,
+  ...
+}:
 {
   options = {
     modules.networkmanager.profiles.lirmm-pandas = {
-      enable = 
-        lib.mkEnableOption "enables networkmanager's profile <lirmm-panda>";
+      enable = lib.mkEnableOption "enables networkmanager's profile <lirmm-panda>";
       ipSuffix = lib.mkOption {
         type = lib.types.int;
         default = 43;
@@ -28,11 +33,12 @@
         "172.16.0.1" = [ "panda_ganesh" ];
       };
     }
-    (lib.mkIf config.modules.networkmanager.profiles.lirmm-pandas.enable
-      (let
+    (lib.mkIf config.modules.networkmanager.profiles.lirmm-pandas.enable (
+      let
         ipSuffixStr = toString config.modules.networkmanager.profiles.lirmm-pandas.ipSuffix;
         macAddr = config.modules.networkmanager.profiles.lirmm-pandas.macAddress;
-      in {
+      in
+      {
         networking = {
           interfaces.${globals.EthernetInterface} = {
             mtu = 1400; # or even 1280 reduce latency
@@ -55,7 +61,7 @@
             ];
           };
         };
-      })
-    )
+      }
+    ))
   ];
 }
