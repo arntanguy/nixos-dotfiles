@@ -25,18 +25,25 @@
 
   nix = {
     settings = {
-      trusted-users = [ "root" "${globals.UserName}" ]; # Replace with your actual username
+      trusted-users = [ "root" "${globals.UserName}" ]; 
+      
       substituters = [
-        "https://cache.nixos.org/"
+        "https://cache.nixos.org"
+        "https://gepetto.cachix.org"
         "https://mc-rtc-nix.cachix.org"
         "https://ros.cachix.org"
+        "https://attic.iid.ciirc.cvut.cz/ros" # <-- Added globally
       ];
+      
       trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "mc-rtc-nix.cachix.org-1:5M3sLvHXJCep4wc1tQl7QuFWL2eH2I0jkuvWtqJDYQs="
+        "gepetto.cachix.org-1:toswMl31VewC0jGkN6+gOelO2Yom0SOHzPwJMY2XiDY="
         "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
+        "ros:JR95vUYsShSqfA1VTYoFt1Nz6uXasm5QrcOsGry9f6Q=" # <-- Added globally
       ];
     };
-    # See https://nixos.wiki/wiki/Storage_optimization
+  
     gc = {
       automatic = true;
       dates = "weekly";
@@ -207,5 +214,4 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   networking.firewall.enable = false;
   system.stateVersion = "25.11";
-
 }

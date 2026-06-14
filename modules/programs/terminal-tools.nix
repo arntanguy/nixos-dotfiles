@@ -8,7 +8,6 @@
   config = lib.mkIf config.modules.programs.terminal-tools.enable {
     environment.systemPackages = with pkgs; [
       unzip
-      neovim
       bat # better cat
       btop
       curl

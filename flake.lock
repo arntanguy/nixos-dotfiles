@@ -72,12 +72,69 @@
         "type": "github"
       }
     },
+    "nvim-wrapper": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "plugins-lze": "plugins-lze",
+        "plugins-lzextras": "plugins-lzextras",
+        "wrappers": "wrappers"
+      },
+      "locked": {
+        "lastModified": 1778150602,
+        "narHash": "sha256-sR/BE+XnYQrNiV4urXU4hQsfR67rTmq0w1msZA/tHBg=",
+        "owner": "arntanguy",
+        "repo": "nvim-wrapper",
+        "rev": "9f39240514b568e96e1844764f4b6f5917d767df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "arntanguy",
+        "repo": "nvim-wrapper",
+        "type": "github"
+      }
+    },
+    "plugins-lze": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777965288,
+        "narHash": "sha256-9SuyTwi5VTItMZOODyk9GFN/+U40gye/p152cZ+W5qk=",
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "rev": "3893146bd80705512cd4d8109c144645aee75497",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lze",
+        "type": "github"
+      }
+    },
+    "plugins-lzextras": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777932976,
+        "narHash": "sha256-yM+GQLUicuPHRwSI9VF8BfQyahYq1H/9cdwQpwwp4xA=",
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "rev": "0d4e65278af04a79e4182af555e759621442a17d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "lzextras",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
-        "sops-nix": "sops-nix"
+        "nvim-wrapper": "nvim-wrapper",
+        "sops-nix": "sops-nix",
+        "wrappers": "wrappers_2"
       }
     },
     "sops-nix": {
@@ -97,6 +154,47 @@
       "original": {
         "owner": "Mic92",
         "repo": "sops-nix",
+        "type": "github"
+      }
+    },
+    "wrappers": {
+      "inputs": {
+        "nixpkgs": [
+          "nvim-wrapper",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777991014,
+        "narHash": "sha256-0DS24OW9d9iz+w0LCz6KpS2IpE2z2gHxeBdMZg9xpDY=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "dc5184095ad488e937ec308b52c9c0b218959d8b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "type": "github"
+      }
+    },
+    "wrappers_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779886850,
+        "narHash": "sha256-Udj+9DzeLccvPKoW9Q8xFdqIhrw2jhYMoqxBv+8iWzo=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "168fd6f514a9f8fa47df4fdcf9ecd61db10aec68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
         "type": "github"
       }
     }

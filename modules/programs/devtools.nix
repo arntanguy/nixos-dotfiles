@@ -1,7 +1,7 @@
 { pkgs, lib, config, inputs, ... }:
 {
   options = {
-    modules.programs.devtools.enable = 
+    modules.programs.devtools.enable =
       lib.mkEnableOption "enables devtools";
   };
 
@@ -21,7 +21,8 @@
       pre-commit
       prek
       vscode
-      inputs.nixCats.packages."${pkgs.system}".nixCats
+      # XXX: we could also use its nixosModule, but not sure how to include it here
+      inputs.nvim-wrapper.packages."${pkgs.system}".neovim
       devpod
       docker
       docker-compose
@@ -29,6 +30,9 @@
       nurl # Generate Nix Fetcher calls from repository URLs
       cachix
       attic-client
+      nix-tree # Interactive visualization of dependency tree
+      graphviz
+      nix-visualize # generate graphs of dependency trees
     ];
   };
 }

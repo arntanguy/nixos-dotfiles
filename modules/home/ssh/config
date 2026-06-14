@@ -3,6 +3,36 @@
 
 AddKeysToAgent yes
 
+# DevPod Start mc-rtc-superbuild-resolute.devpod
+Host mc-rtc-superbuild-resolute.devpod
+  ForwardAgent yes
+  LogLevel error
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
+  ProxyCommand "/nix/store/z224n0gqnqp69q7kn0gdpks7rhzr5r0a-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-superbuild-resolute --workdir "/home/vscode/superbuild"
+  User vscode
+# DevPod End mc-rtc-superbuild-resolute.devpod
+# DevPod Start mc-rtc-superbuild-noble.devpod
+Host mc-rtc-superbuild-noble.devpod
+  ForwardAgent yes
+  LogLevel error
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
+  ProxyCommand "/nix/store/z224n0gqnqp69q7kn0gdpks7rhzr5r0a-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-superbuild-noble --workdir "/home/vscode/superbuild"
+  User vscode
+# DevPod End mc-rtc-superbuild-noble.devpod
+# DevPod Start mc-rtc-pid-jammy.devpod
+Host mc-rtc-pid-jammy.devpod
+  ForwardAgent yes
+  LogLevel error
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
+  ProxyCommand "/nix/store/z224n0gqnqp69q7kn0gdpks7rhzr5r0a-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-pid-jammy --workdir "/home/vscode/superbuild"
+  User vscode
+# DevPod End mc-rtc-pid-jammy.devpod
 # DevPod Start panda-prosthesis-superbuild.devpod
 Host panda-prosthesis-superbuild.devpod
   ForwardAgent yes

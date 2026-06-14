@@ -15,7 +15,6 @@
     ++ lib.optional globals.enableBash ./bash.nix
     ++ lib.optional globals.enableFuzzel ./fuzzel/fuzzel.nix
     ++ lib.optional globals.enableTmux ./tmux.nix
-    # ++ lib.optional globals.enableNvim ./nvim.nix
     ++ lib.optional globals.enableGhostty ./ghostty.nix
     ++ lib.optional globals.enableGit ./git.nix
     ++ lib.optional globals.enableGit ./lazygit/lazygit.nix

@@ -9,11 +9,16 @@
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixCats = {
       # url = "github:BirdeeHub/nixCats-nvim?dir=templates/example";
       # url = "github:arntanguy/nvim-nix";
       # url = "git+file:./modules/home/nvim-nix?submodules=1";
       url = "github:arntanguy/nvim-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nvim-wrapper = {
+      url = "github:arntanguy/nvim-wrapper";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -23,12 +28,17 @@
         inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+  # See https://birdeehub.github.io/nix-wrapper-modules/md/getting-started.html
+  inputs.wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
+  inputs.wrappers.inputs.nixpkgs.follows = "nixpkgs";
+
 
   outputs =
     {
       nixpkgs,
       home-manager,
       sops-nix,
+      wrappers,
       ...
     }@inputs:
     let
