@@ -8,6 +8,7 @@
       user.name = globals.GitName;
       user.email = globals.GitEmail;
       init.defaultBranch = "main";
+      rerere.enable = true;
       pull.rebase = true;
       color.ui = "auto";
       # Use SSH instead of HTTPS for GitHub
