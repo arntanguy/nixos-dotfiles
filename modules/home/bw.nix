@@ -1,10 +1,15 @@
-{ globals, ... }:
+{ globals, pkgs, ... }:
 
 {
-  services.bitwarden-directory-connector-cli.domain = globals.Bwserver;
-  services.bitwarden-directory-connector-cli.enable = true;
-
   home.packages = with pkgs; [
-    bitwarden-cli
+    rofi-rbw-wayland
   ];
+  programs.rbw = {
+    enable = true;
+    settings = {
+      base_url = "${globals.Bwserver}";
+      email = "${globals.Bwemail}";
+      pinentry = pkgs.pinentry-rofi;
+    };
+  };
 }

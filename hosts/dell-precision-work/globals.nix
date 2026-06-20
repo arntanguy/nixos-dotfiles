@@ -9,6 +9,7 @@ defaults
   GitName = "Arnaud TANGUY";
   GitEmail = "arn.tanguy@gmail.com";
   Bwserver = "https://vault.arntanguy.fr";
+  Bwemail = "arn.tanguy@gmail.com";
   # When plugged to the ethernet port
   EthernetInterface = "enp0s31f6";
   # when plugged over usb-c

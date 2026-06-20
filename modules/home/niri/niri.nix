@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   globals,
   ...
 }:
@@ -49,6 +50,7 @@
             // accel-speed 0.2
             // accel-profile "flat"
             // scroll-method "no-scroll"
+            // scroll-factor 0.5
         }
 
         trackpoint {
@@ -262,7 +264,7 @@
     }
 
     // firefox has no transparency
-    /-window-rule {
+    window-rule {
         match app-id="firefox"
         opacity 1.0
     }
@@ -368,6 +370,7 @@
         Mod+Shift+O hotkey-overlay-title="toggle opacity" { toggle-window-rule-opacity; }
 
         // Mod+W hotkey-overlay-title="toggle waybar" repeat=false { spawn-sh "pkill -SIGUSR1 waybar || waybar"; }
+        // Mod+W hotkey-overlay-title="toggle noctalia-shell" repeat=false { spawn-sh "pkill -SIGUSR1 noctalia-shell || noctalia-shell"; }
 
         // Suggested binds for running programs: terminal, app launcher, screen locker.
         Mod+Return hotkey-overlay-title="Open a Terminal " { spawn "${toString globals.terminal}"; }
@@ -380,6 +383,10 @@
         Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
         Mod+S { spawn-sh "noctalia-shell ipc call controlCenter toggle"; }
         Mod+Comma { spawn-sh "noctalia-shell ipc call settings toggle"; }
+
+        ${lib.optionalString globals.enableBitwarden ''
+          Mod+P hotkey-overlay-title="Copy Bitwarden Pwd" { spawn-sh "rofi-rbw -a copy --clipboarder wl-copy -t password -r 'Copy pwd: '"; }
+        ''}
 
         // Audio & Brightness
         XF86AudioRaiseVolume { spawn-sh "noctalia-shell ipc call volume increase"; }
@@ -447,7 +454,8 @@
         // ...
 
         // And you can also move a whole workspace to another monitor:
-        // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+        Mod+Shift+Left hotkey-overlay-title="workspace move left" { move-workspace-to-monitor-left; }
+        Mod+Shift+Right hotkey-overlay-title="workspace move right" { move-workspace-to-monitor-right; }
         // ...
 
         Mod+Page_Down      { focus-workspace-down; }

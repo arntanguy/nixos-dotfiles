@@ -22,7 +22,8 @@
     ++ lib.optional globals.enableScripts ./scripts/scripts.nix
     ++ lib.optional globals.enableNvidia ./nvidia.nix
     ++ lib.optional globals.enableSsh ./ssh/ssh.nix
-    ++ lib.optional globals.enableEmail ./email.nix;
+    ++ lib.optional globals.enableEmail ./email.nix
+    ++ lib.optional globals.enableBitwarden ./bw.nix;
   # ++ lib.optional globals.enableDavinciResolve ./davinci-resolve.nix;
 
   dconf.settings = {

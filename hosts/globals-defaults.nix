@@ -4,6 +4,7 @@
   GitName = "Arnaud TANGUY";
   GitEmail = "arn.tanguy@gmail.com";
   Bwserver = "https://vault.arntanguy.fr";
+  Bwemail = "arn.tanguy@gmail.com";
   EthernetInterface = "eth0";
   terminal = "ghostty";
   xkb = {
@@ -12,6 +13,7 @@
     options = "grp:win_space_toggle,compose:ralt,ctrl:nocaps";
   };
 
+  enableBitwarden = true;
   enableWaybar = true;
   enableNiri = true;
   enableBash = true;
