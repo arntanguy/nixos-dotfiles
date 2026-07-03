@@ -11,9 +11,6 @@
     };
 
     nixCats = {
-      # url = "github:BirdeeHub/nixCats-nvim?dir=templates/example";
-      # url = "github:arntanguy/nvim-nix";
-      # url = "git+file:./modules/home/nvim-nix?submodules=1";
       url = "github:arntanguy/nvim-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -34,6 +31,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
   # See https://birdeehub.github.io/nix-wrapper-modules/md/getting-started.html
   inputs.wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
   inputs.wrappers.inputs.nixpkgs.follows = "nixpkgs";
@@ -50,37 +48,22 @@
     let
       system = "x86_64-linux";
 
-      # Define an overlay to override some packages
+      # Define global overlays natively fed into the NixOS system builders
       overlays = [
         (final: prev: {
-          # FIXME: this overlay is done to force-enable google-accounts support in gvfs, which is required for google-drive support in nautilus.
-          # This is necessary for nixos 25.11, as google account support is disabled by default as there are security vulnerabilities
-          # in libsoup. see https://github.com/NixOS/nixpkgs/issues/438121
-          # required by modules/nautilus.nix
+          # Keep this if still needed, or remove if unstable gvfs works fine now
           gnome = prev.gnome.overrideScope (
             gfinal: gprev: {
               gvfs = gprev.gvfs.override {
-                googleSupport = true;
                 gnomeSupport = true;
               };
             }
           );
         })
       ];
-      # define a new package set replacing nixpkgs input with the overlayed nixpkgs set
-      pkgs = import nixpkgs {
-        inherit system overlays;
-        config = {
-          allowUnfree = true;
-          permittedInsecurePackages = [
-            # Required by gnome.gvfs.googleSupport in nixkpgs overlay
-            "libsoup-2.74.3"
-          ];
-        };
-      };
 
-      # Configure treefmt eval for your system
-      treefmtEval = treefmt-nix.lib.evalModule pkgs {
+      # Configure treefmt eval for your system (using raw nixpkgs legacyPackages)
+      treefmtEval = treefmt-nix.lib.evalModule nixpkgs.legacyPackages.${system} {
         projectRootFile = "flake.nix";
 
         # Configure the formatters you want to use
@@ -96,10 +79,18 @@
           globals = import ./hosts/dell-precision-work/globals.nix;
         };
         modules = [
+          # Native nixpkgs configuration block for this host evaluation tree
+          {
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.permittedInsecurePackages = [
+              "libsoup-2.74.3"
+              "electron-39.8.10"
+            ];
+            nixpkgs.overlays = overlays;
+          }
           ./hosts/dell-precision-work/configuration.nix
           ./modules
         ];
-        pkgs = pkgs; # pass your overlayed pkgs
       };
 
       # dell precision 5570 for panda control (old Julien's laptop)
@@ -110,10 +101,17 @@
           globals = import ./hosts/lirmm-bamboo/globals.nix;
         };
         modules = [
+          {
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.permittedInsecurePackages = [
+              "libsoup-2.74.3"
+            ];
+            nixpkgs.overlays = overlays;
+          }
           ./hosts/lirmm-bamboo/configuration.nix
           ./modules
+          # inputs.nvim-wrapper.nixosModules.default
         ];
-        pkgs = pkgs;
       };
 
       # alienware for panda control
@@ -124,10 +122,16 @@
           globals = import ./hosts/rob-alienware/globals.nix;
         };
         modules = [
+          {
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.permittedInsecurePackages = [
+              "libsoup-2.74.3"
+            ];
+            nixpkgs.overlays = overlays;
+          }
           ./hosts/rob-alienware/configuration.nix
           ./modules
         ];
-        pkgs = pkgs;
       };
 
       # Expose the formatter wrapper to the flake outputs

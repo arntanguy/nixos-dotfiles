@@ -20,6 +20,10 @@
     }
   ];
 
+  # programs.nvim-wrapper = {
+  #   enable = true;
+  # };
+
   # FIXME: override default mac address with a recognized one
   # modules.networkmanager.profiles.lirmm-pandas.macAddress = "34:48:ed:7e:e4:70";
 
