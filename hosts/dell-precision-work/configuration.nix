@@ -21,9 +21,11 @@
   ];
 
   # FIXME: override default mac address with a recognized one
-  modules.networkmanager.profiles.lirmm-pandas.macAddress = "34:48:ed:7e:e4:70";
+  # modules.networkmanager.profiles.lirmm-pandas.macAddress = "34:48:ed:7e:e4:70";
 
   nix = {
+    # makes nix run nixpkgs#... use the same nixpkgs as the system by default
+    registry.nixpkgs.flake = inputs.nixpkgs;
     settings = {
       trusted-users = [
         "root"
@@ -40,8 +42,8 @@
 
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "mc-rtc-nix.cachix.org-1:5M3sLvHXJCep4wc1tQl7QuFWL2eH2I0jkuvWtqJDYQs="
         "gepetto.cachix.org-1:toswMl31VewC0jGkN6+gOelO2Yom0SOHzPwJMY2XiDY="
+        "mc-rtc-nix.cachix.org-1:5M3sLvHXJCep4wc1tQl7QuFWL2eH2I0jkuvWtqJDYQs="
         "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
         "ros:JR95vUYsShSqfA1VTYoFt1Nz6uXasm5QrcOsGry9f6Q=" # <-- Added globally
       ];
@@ -142,6 +144,9 @@
     steam-run
     wireshark
     wordlists
+
+    # Printer
+    system-config-printer
 
     # Bluetooth & Hardware
     bzmenu # for bluetooth

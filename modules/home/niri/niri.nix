@@ -18,6 +18,23 @@
   # services.upower.enable = true;
 
   xdg.configFile."swaylock/config".source = ./mocha.conf;
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        # Fall back to GNOME/GTK for dialogues like printing
+        default = [
+          "gnome"
+          "gtk"
+        ];
+      };
+    };
+  };
+
   home.file.".local/bin/nws.sh".source = ./nws.sh;
   home.file.".local/bin/niri-kill-focused.sh".source = ./niri-kill-focused.sh;
 

@@ -36,6 +36,7 @@
                   id = "LIRMM";
                   type = "wifi";
                   autoconnect = true;
+                  autoconnect-priority = 99; # Higher number wins
                 };
                 wifi = {
                   mode = "infrastructure";
@@ -56,6 +57,7 @@
                   id = "eduroam";
                   type = "wifi";
                   autoconnect = true;
+                  autoconnect-priority = 98; # Higher number wins
                 };
                 wifi = {
                   mode = "infrastructure";
@@ -76,6 +78,7 @@
                   id = "arnaud-android-ap";
                   type = "wifi";
                   autoconnect = false;
+                  autoconnect-priority = 10; # Higher number wins
                 };
                 wifi = {
                   mode = "infrastructure";
@@ -92,11 +95,25 @@
                   method = "ignore";
                 };
               };
+              dhcp-ethernet = {
+                connection = {
+                  id = "Ethernet (DHCP)";
+                  type = "ethernet";
+                  autoconnect = true;
+                };
+                ipv4 = {
+                  method = "auto";
+                };
+                ipv6 = {
+                  method = "auto";
+                };
+              };
               robots-ethernet = {
                 connection = {
                   id = "Robots Ethernet";
                   type = "ethernet";
                   autoconnect = false;
+                  autoconnect-priority = 100; # Higher number wins
                 };
                 ipv4 = {
                   method = "manual";

@@ -35,6 +35,7 @@
       nurl # Generate Nix Fetcher calls from repository URLs
       cachix
       attic-client
+      cloudsmith-cli
       nix-tree # Interactive visualization of dependency tree
       graphviz
       nix-visualize # generate graphs of dependency trees
