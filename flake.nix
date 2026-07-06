@@ -10,10 +10,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixCats = {
-      url = "github:arntanguy/nvim-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nvim-wrapper = {
       url = "github:arntanguy/nvim-wrapper";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -110,7 +106,6 @@
           }
           ./hosts/lirmm-bamboo/configuration.nix
           ./modules
-          # inputs.nvim-wrapper.nixosModules.default
         ];
       };
 

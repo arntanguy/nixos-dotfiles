@@ -27,7 +27,7 @@
       prek
       vscode
       # XXX: we could also use its nixosModule, but not sure how to include it here
-      # inputs.nvim-wrapper.packages."${pkgs.system}".neovim
+      inputs.nvim-wrapper.packages."${pkgs.system}".neovim
       devpod
       docker
       docker-compose
