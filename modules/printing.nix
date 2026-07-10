@@ -32,6 +32,8 @@
     };
     environment.systemPackages = with pkgs; [
       wsdd # Web Service Discovery (WSD) host daemon for SMB/Samba
+      # Printer
+      system-config-printer
     ];
   };
 }

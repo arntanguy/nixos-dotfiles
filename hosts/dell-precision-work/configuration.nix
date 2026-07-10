@@ -20,10 +20,6 @@
     }
   ];
 
-  # programs.nvim-wrapper = {
-  #   enable = true;
-  # };
-
   # FIXME: override default mac address with a recognized one
   # modules.networkmanager.profiles.lirmm-pandas.macAddress = "34:48:ed:7e:e4:70";
 
@@ -52,6 +48,10 @@
         "ros:JR95vUYsShSqfA1VTYoFt1Nz6uXasm5QrcOsGry9f6Q=" # <-- Added globally
       ];
     };
+    extraOptions = ''
+      # Ensure we can still build when missing cache server is not accessible
+      fallback = true
+    '';
 
     gc = {
       automatic = true;
@@ -148,9 +148,6 @@
     steam-run
     wireshark
     wordlists
-
-    # Printer
-    system-config-printer
 
     # Bluetooth & Hardware
     bzmenu # for bluetooth
