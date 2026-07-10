@@ -89,6 +89,27 @@
         ];
       };
 
+      nixosConfigurations."huiting-mini" = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+          globals = import ./hosts/dell-precision-work/globals.nix;
+        };
+        modules = [
+          # Native nixpkgs configuration block for this host evaluation tree
+          {
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.permittedInsecurePackages = [
+              "libsoup-2.74.3"
+              "electron-39.8.10"
+            ];
+            nixpkgs.overlays = overlays;
+          }
+          ./hosts/huiting-mini/configuration.nix
+          ./modules
+        ];
+      };
+
       # dell precision 5570 for panda control (old Julien's laptop)
       nixosConfigurations."lirmm-bamboo" = nixpkgs.lib.nixosSystem {
         inherit system;
