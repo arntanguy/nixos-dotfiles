@@ -36,16 +36,18 @@
         "https://cache.nixos.org"
         "https://gepetto.cachix.org"
         "https://mc-rtc-nix.cachix.org"
+        "https://attic.arntanguy.fr/mc-rtc-nix-private"
         "https://ros.cachix.org"
-        "https://attic.iid.ciirc.cvut.cz/ros" # <-- Added globally
+        "https://attic.iid.ciirc.cvut.cz/ros"
       ];
 
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "gepetto.cachix.org-1:toswMl31VewC0jGkN6+gOelO2Yom0SOHzPwJMY2XiDY="
         "mc-rtc-nix.cachix.org-1:5M3sLvHXJCep4wc1tQl7QuFWL2eH2I0jkuvWtqJDYQs="
+        "mc-rtc-nix-private:jXpQCG0bFJIJxAuQpHQEyRsF+PyUcvIyFmnBcR5kEuo="
         "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
-        "ros:JR95vUYsShSqfA1VTYoFt1Nz6uXasm5QrcOsGry9f6Q=" # <-- Added globally
+        "ros:JR95vUYsShSqfA1VTYoFt1Nz6uXasm5QrcOsGry9f6Q="
       ];
     };
     extraOptions = ''
