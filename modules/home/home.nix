@@ -14,6 +14,7 @@
     ++ lib.optional globals.enableWaybar ./waybar/waybar.nix
     ++ lib.optional globals.enableNiri ./niri/niri.nix
     ++ lib.optional globals.enableBash ./bash.nix
+    ++ lib.optional globals.enableZsh ./zsh/zsh.nix
     ++ lib.optional globals.enableFuzzel ./fuzzel/fuzzel.nix
     ++ lib.optional globals.enableTmux ./tmux.nix
     ++ lib.optional globals.enableGhostty ./ghostty.nix

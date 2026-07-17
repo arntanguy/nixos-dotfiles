@@ -15,8 +15,10 @@
     ./keyboard
     ./programs
     ./ccache.nix
+    ./zsh.nix
   ];
 
+  modules.zsh.enable = lib.mkDefault true;
   modules.laptop.enable = lib.mkDefault true;
   modules.ccache.enable = lib.mkDefault true;
   modules.yubikey.enable = lib.mkDefault true;
