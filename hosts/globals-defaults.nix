@@ -21,7 +21,7 @@
   enableFuzzel = true;
   enableTmux = true;
   enableNvim = true;
-  enableGhostty = true;
+  enableKitty = true;
   enableGit = true;
   enableScripts = true;
   enableNvidia = true;

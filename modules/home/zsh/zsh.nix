@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  globals,
+  ...
+}:
 {
   home.file.".p10k.zsh".source = ./p10k.zsh;
   programs.zsh = {
@@ -9,99 +14,61 @@
       share = true;
     };
 
-    # # With Zplug:
-    #   zplug = {
-    #     enable = true;
-    #     plugins = [
-    #       {name = "zsh-users/zsh-autosuggestions";} # Simple plugin installation
-    #       {
-    #         name = "romkatv/powerlevel10k";
-    #         tags = [ "as:theme" "depth:1" ];
-    #       } # Installations with additional options. For the list of options, please refer to Zplug README.
-    #     ];
-    #   };
-    #
-    # # With Oh-My-Zsh:
-    # oh-my-zsh = {
-    #   enable = true;
-    #   plugins = [
-    #     "git"         # also requires `programs.git.enable = true;`
-    #     "nvm"
-    #     "pip"
-    #     "pre-commit"
-    #     "ssh"
-    #     "zsh-autosuggestions"
-    #   ];
-    #   theme = "robbyrussell";
-    # };
-    #
-    # # With Antidote:
-    #  antidote = {
-    #    enable = true;
-    #    plugins = [''
-    #      zsh-users/zsh-autosuggestions
-    #      ohmyzsh/ohmyzsh path:lib/git.zsh
-    #    '']; # explanation of "path:..." and other options explained in Antidote README.
-    # };
-
     antidote = {
       enable = true;
       plugins = [
-        # Powerlevel10k theme
+        # Powerlevel10k theme (fancy, fast prompt)
         "romkatv/powerlevel10k"
 
-        # Autosuggestions and syntax highlighting
+        # Autosuggestions as you type
         "zsh-users/zsh-autosuggestions"
+        # Syntax highlighting for commands
         "zsh-users/zsh-syntax-highlighting"
 
-        # Fast directory switching
+        # Fast directory switching (z command)
+        # Use z <pattern> to go the the most used directory using <pattern>
         "rupa/z"
 
-        # Fuzzy finder integration
+        # Fuzzy tab completion
         "Aloxaf/fzf-tab"
+        # Fuzzy search through command history
+        "joshskidmore/zsh-fzf-history-search"
 
-        # Useful Oh-My-Zsh plugins
+        # Oh-My-Zsh plugins
+        # Git aliases and helpers
         "ohmyzsh/ohmyzsh path:plugins/git"
+        # Colored man pages
         "ohmyzsh/ohmyzsh path:plugins/colored-man-pages"
-        "ohmyzsh/ohmyzsh path:plugins/sudo"
-        "ohmyzsh/ohmyzsh path:plugins/command-not-found"
+        # Quickly prepend sudo to commands
+        # Pres <Esc><Esc> twice to prepend sudo
+        # "ohmyzsh/ohmyzsh path:plugins/sudo"
+        # History management
         "ohmyzsh/ohmyzsh path:plugins/history"
+        # Reminds you to use defined aliases
+        "MichaelAquilina/zsh-you-should-use"
       ];
     };
     initContent = ''
       [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+      setopt NO_BEEP
     '';
+    shellAliases = {
+      grep = "grep --color=auto";
+      ls = "lsd";
+      ll = "ls -l";
+      la = "ls -lAtr";
+      cat = "bat";
+      ta = "tmux a";
+      gh_queue_pr = "gh pr comment -b '@mergifyio queue'";
+      gh_qpr = "gh_queue_pr";
+      gh_co = "gh checkout";
+    }
+    // lib.optionalAttrs globals.enableBitwarden {
+      token_cachix = "rbw get token_mc-rtc-nix-cachix";
+      token_attic_aist = "rbw get token_attic";
+      token_copy_rofi = "rofi-rbw -a copy --clipboarder wl-copy -t password -r 'Copy pwd: '";
+      token_print_rofi = "rofi-rbw -a print -t password -r 'Print pwd: '";
+    };
 
-    # Manual
-    # plugins = [
-    #   {
-    #     name = "zsh-autocomplete";
-    #     src = pkgs.fetchFromGitHub {
-    #       owner = "marlonrichert";
-    #       repo = "zsh-autocomplete";
-    #       rev = "23.07.13";
-    #       sha256 = "sha256-/6V6IHwB5p0GT1u5SAiUa20LjFDSrMo731jFBq/bnpw=";
-    #     };
-    #   }
-    #   {
-    #     name = "powerlevel10k";
-    #     src = pkgs.zsh-powerlevel10k;
-    #     file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-    #   }
-    #   {
-    #     name = "powerlevel10k-config";
-    #     src = ./p10k-config;
-    #     file = "p10k.zsh";
-    #   }
-    #   {
-    #     name = "zsh-syntax-highlighting";
-    #     src = pkgs.fetchFromGitHub {
-    #       owner = "zsh-users";
-    #       repo = "zsh-syntax-highlighting";
-    #       rev = "0.8.0";
-    #       sha256 = "sha256-iJdWopZwHpSyYl5/FQXEW7gl/SrKaYDEtTH9cGP7iPo=";
-    #     };
-    #   }
-    # ];
   };
 }

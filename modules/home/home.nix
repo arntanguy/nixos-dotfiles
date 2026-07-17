@@ -17,7 +17,7 @@
     ++ lib.optional globals.enableZsh ./zsh/zsh.nix
     ++ lib.optional globals.enableFuzzel ./fuzzel/fuzzel.nix
     ++ lib.optional globals.enableTmux ./tmux.nix
-    ++ lib.optional globals.enableGhostty ./ghostty.nix
+    ++ lib.optional globals.enableKitty ./kitty.nix
     ++ lib.optional globals.enableGit ./git.nix
     ++ lib.optional globals.enableGit ./lazygit/lazygit.nix
     ++ lib.optional globals.enableScripts ./scripts/scripts.nix

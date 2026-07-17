@@ -137,7 +137,6 @@
     bitwarden-desktop
     eog # eye-of-gnome image viewer
     ffmpeg
-    ghostty
     gimp
     krita
     obs-studio
