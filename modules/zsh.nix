@@ -17,5 +17,13 @@
     programs.zsh = {
       enable = true;
     };
+
+    # Black magic to force nix develop to use zsh instead of bash
+    environment.systemPackages = [ pkgs.any-nix-shell ];
+    # Automatically initialize it for interactive Zsh sessions
+    programs.zsh.interactiveShellInit = ''
+      any-nix-shell zsh --info-right | source /dev/stdin
+    '';
+    # End black magic
   };
 }

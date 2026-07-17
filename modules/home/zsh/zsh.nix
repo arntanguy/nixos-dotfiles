@@ -54,7 +54,7 @@
     '';
     shellAliases = {
       grep = "grep --color=auto";
-      ls = "lsd";
+      ls = "lsd --hyperlink=auto";
       ll = "ls -l";
       la = "ls -lAtr";
       cat = "bat";
