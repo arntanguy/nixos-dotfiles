@@ -49,6 +49,15 @@
         "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
         "ros:JR95vUYsShSqfA1VTYoFt1Nz6uXasm5QrcOsGry9f6Q="
       ];
+
+      # For ccache
+      extra-sandbox-paths =
+        let
+          ccacheDir = config.programs.ccache.cacheDir;
+        in
+        [
+          (builtins.trace "adding ccache dir to nix.settings.extra-sandbox-paths: ${ccacheDir}" ccacheDir)
+        ];
     };
     extraOptions = ''
       # Ensure we can still build when missing cache server is not accessible
