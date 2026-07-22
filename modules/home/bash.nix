@@ -5,10 +5,6 @@
   ...
 }:
 
-let
-  # Explicitly force fd to load your global ignore file
-  fdBase = "fd --ignore-file ~/.config/fd/ignore";
-in
 {
   # Configure ~/.config/fd/ignore using pure gitignore syntax
   home.file.".config/fd/ignore".text = ''
@@ -32,6 +28,11 @@ in
   programs.starship = {
     enable = true;
     enableBashIntegration = true;
+    settings = {
+      direnv = {
+        disabled = true; # it shows it wrong anyways
+      };
+    };
   };
 
   # use z <name> to jump to most likely directory
@@ -53,6 +54,11 @@ in
     enable = true;
     enableBashIntegration = true;
     historyWidget.command = ""; # Yield Ctrl+R to Atuin
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
   };
 
   programs.bash = {
