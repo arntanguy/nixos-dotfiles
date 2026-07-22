@@ -16,9 +16,11 @@
     ./programs
     ./ccache.nix
     ./zsh.nix
+    ./bash.nix
   ];
 
-  modules.zsh.enable = lib.mkDefault true;
+  modules.zsh.enable = lib.mkDefault false;
+  modules.bash.enable = lib.mkDefault true;
   modules.laptop.enable = lib.mkDefault true;
   modules.ccache.enable = lib.mkDefault true;
   modules.yubikey.enable = lib.mkDefault true;

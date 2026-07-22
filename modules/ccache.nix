@@ -11,7 +11,10 @@
   };
 
   config = lib.mkIf config.modules.ccache.enable {
-    programs.ccache.enable = true;
+    programs.ccache = {
+      enable = true;
+    };
+
     nixpkgs.overlays = [
       (self: super: {
         ccacheWrapper =

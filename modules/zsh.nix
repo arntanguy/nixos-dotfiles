@@ -19,6 +19,7 @@
     };
 
     # Black magic to force nix develop to use zsh instead of bash
+    # WARNING: shellHooks do not work well with this, they run in bash before starting zsh...
     environment.systemPackages = [ pkgs.any-nix-shell ];
     # Automatically initialize it for interactive Zsh sessions
     programs.zsh.interactiveShellInit = ''
