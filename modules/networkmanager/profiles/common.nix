@@ -31,6 +31,22 @@
               config.sops.secrets."data/networking/wifi/EDUROAM".path
             ];
             profiles = {
+              home_brest = {
+                connection = {
+                  id = "home_brest";
+                  type = "wifi";
+                  autoconnect = true;
+                  autoconnect-priority = 100; # Higher number wins
+                };
+                wifi = {
+                  mode = "infrastructure";
+                  ssid = "Livebox-6C80";
+                };
+                wifi-security = {
+                  key-mgmt = "wpa-psk";
+                  psk = "$HOME_BREST_PASSWORD";
+                };
+              };
               LIRMM = {
                 connection = {
                   id = "LIRMM";
