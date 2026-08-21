@@ -31,7 +31,14 @@
         "172.16.1.7" = [ "panda7" ];
         "192.168.1.2" = [ "panda2" ];
         "172.16.0.1" = [ "panda_ganesh" ];
+        "192.168.42.32" = [ "ender3.ethernet" ];
       };
+      networking.networkmanager.enable = true;
+
+      # Do not let NetworkManager handle ethernet interface
+      networking.networkmanager.unmanaged = [
+        globals.EthernetInterface
+      ];
     }
     (lib.mkIf config.modules.networkmanager.profiles.lirmm-pandas.enable (
       let
@@ -56,6 +63,10 @@
               }
               {
                 address = "192.168.1.${ipSuffixStr}";
+                prefixLength = 24;
+              }
+              { # ender3 ethernet
+                address = "192.168.42.${ipSuffixStr}";
                 prefixLength = 24;
               }
             ];
