@@ -15,6 +15,7 @@
       evince # pdf reader
       zathura # pdf reader (minimalist)
       obsidian
+      inkscape
     ];
   };
 }
