@@ -28,4 +28,5 @@
   enableSsh = true;
   enableEmail = true;
   enableDavinciResolve = true;
+  enableAudioEditing = true;
 }
