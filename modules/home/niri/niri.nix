@@ -106,13 +106,13 @@
         
         // Position it to the right of your laptop (assuming laptop is 3840px wide)
         // If your laptop has a scale of 2.25, x would be 3840/2.25=1706 (logical pixels)
-        position x=1707 y=0
+        position x=-1707 y=0
         
         // Scale 1.0 is standard for a 27" 1080p monitor
         scale 1.0
     }
 
-    // External monitor (work office). Left of main laptop screen
+    // External monitor (work office). Right of main laptop screen
     output "Dell Inc. DELL P2719HC 2Q8ZX13" {
         // Standard 1080p resolution for this model
         // You can also use "1920x1080@60.000" to be precise
@@ -120,7 +120,7 @@
         
         // Position it to the right of your laptop (assuming laptop is 3840px wide)
         // If your laptop has a scale of 2.25, x would be 3840/2.25=1706 (logical pixels)
-        position x=-1707 y=0
+        position x=1707 y=0
         
         // Scale 1.0 is standard for a 27" 1080p monitor
         scale 1.0
