@@ -17,6 +17,7 @@
     ./ccache.nix
     ./zsh.nix
     ./bash.nix
+    ./audio.nix
   ];
 
   modules.zsh.enable = lib.mkDefault false;
@@ -31,4 +32,5 @@
   modules.keyboard-mods.enable = lib.mkDefault true;
   modules.nautilus.enable = lib.mkDefault true;
   modules.printing.enable = lib.mkDefault true;
+  modules.audio.enable = lib.mkDefault true;
 }
