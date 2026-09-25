@@ -22,6 +22,7 @@
 
   # FIXME: override default mac address with a recognized one
   # modules.networkmanager.profiles.lirmm-pandas.macAddress = "34:48:ed:7e:e4:70";
+  modules.syncthing.enable = true;
 
   nix = {
     # makes nix run nixpkgs#... use the same nixpkgs as the system by default
