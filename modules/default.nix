@@ -16,13 +16,13 @@
     ./programs
     ./ccache.nix
     ./zsh.nix
-    ./bash.nix
+    # ./bash.nix
     ./audio.nix
     ./syncthing.nix
   ];
 
   modules.zsh.enable = lib.mkDefault false;
-  modules.bash.enable = lib.mkDefault true;
+  # modules.bash.enable = lib.mkDefault true;
   modules.laptop.enable = lib.mkDefault true;
   modules.ccache.enable = lib.mkDefault true;
   modules.yubikey.enable = lib.mkDefault true;

@@ -30,6 +30,7 @@
       den.aspects.communication
       den.aspects.terminal-tools
       den.aspects.audio
+      den.aspects.bash
     ];
     # nixos = { pkgs, ... }: { environment.systemPackages = [ pkgs.hello ]; };
     homeManager = { pkgs, ... }: {
@@ -37,6 +38,16 @@
         pkgs.vim
         pkgs.cowsay
       ];
+
+      programs.bash = {
+        shellAliases = {
+          token_cachix = "rbw get token_mc-rtc-nix-cachix";
+          token_attic_aist = "rbw get token_attic";
+          token_copy_rofi = "rofi-rbw -a copy --clipboarder wl-copy -t password -r 'Copy pwd: '";
+          token_print_rofi = "rofi-rbw -a print -t password -r 'Print pwd: '";
+          booo = "echo 'booo'";
+        };
+      };
     };
   };
 }
