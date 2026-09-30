@@ -13,9 +13,9 @@
       active_border_color = "none";
     };
   };
-  home.packages = with pkgs; [
-    fzf
-  ];
+  # home.packages = with pkgs; [
+  #   fzf
+  # ];
 
   programs.ghostty = {
     enable = true;

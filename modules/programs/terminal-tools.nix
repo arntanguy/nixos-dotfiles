@@ -16,7 +16,8 @@
       btop
       curl
       fastfetch
-      fzf
+      file
+      # fzf
       jq
       lsd # better ls
       ripgrep

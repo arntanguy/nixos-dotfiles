@@ -17,6 +17,8 @@
       gcc
       ccache
       gh # github cli
+      gh-f # gh cli fzf extension
+      github-copilot-cli # agentic cli
       git
       gnumake
       go

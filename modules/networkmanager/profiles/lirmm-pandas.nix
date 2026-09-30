@@ -65,7 +65,8 @@
                 address = "192.168.1.${ipSuffixStr}";
                 prefixLength = 24;
               }
-              { # ender3 ethernet
+              {
+                # ender3 ethernet
                 address = "192.168.42.${ipSuffixStr}";
                 prefixLength = 24;
               }
