@@ -17,7 +17,7 @@
 
   config = lib.mkIf config.modules.networkmanager.enable {
     networking = {
-      hostName = globals.HostName;
+      hostName = lib.mkDefault globals.HostName;
 
       networkmanager = {
         enable = true;

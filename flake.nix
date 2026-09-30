@@ -26,6 +26,9 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    import-tree.url = "github:denful/import-tree";
+    den.url = "github:denful/den";
   };
 
   # See https://birdeehub.github.io/nix-wrapper-modules/md/getting-started.html
@@ -42,6 +45,15 @@
       ...
     }@inputs:
     let
+      den =
+        (inputs.nixpkgs.lib.evalModules {
+          modules = [ (inputs.import-tree ./den-modules) ];
+          specialArgs.inputs = inputs;
+        }).config;
+
+      inherit (den.den.hosts.x86_64-linux) dell-precision-work;
+      inherit (den.den.hosts.aarch64-darwin) iceberg;
+
       system = "x86_64-linux";
 
       # Define global overlays natively fed into the NixOS system builders
@@ -68,13 +80,14 @@
       };
     in
     {
-      nixosConfigurations."arnaud" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."dell-precision-work" = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
           inherit inputs;
           globals = import ./hosts/dell-precision-work/globals.nix;
         };
         modules = [
+          dell-precision-work.mainModule
           # Native nixpkgs configuration block for this host evaluation tree
           {
             nixpkgs.config.allowUnfree = true;
