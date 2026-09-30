@@ -29,4 +29,6 @@
   enableEmail = true;
   enableDavinciResolve = true;
   enableAudioEditing = true;
+  enableZotero = true;
+  enableCalibre = true;
 }

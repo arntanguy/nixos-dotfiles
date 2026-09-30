@@ -36,9 +36,25 @@
         };
       };
       folders = {
-        "zotero" = {
-          label = "zotero";
-          path = "/home/${globals.UserName}/Sync/zotero";
+        "zotero-storage" = {
+          label = "zotero-storage";
+          path = "/home/${globals.UserName}/Zotero/storage";
+          # share with these devices
+          devices = [
+            "syncthing.arntanguy.fr"
+          ];
+        };
+        "obsidian-vault" = {
+          label = "obsidian-vault";
+          path = "/home/${globals.UserName}/Obsidian Vault";
+          # share with these devices
+          devices = [
+            "syncthing.arntanguy.fr"
+          ];
+        };
+        "core-x4-camera" = {
+          label = "core-x4-camera";
+          path = "/home/${globals.UserName}/Sync/core-x4-camera";
           # share with these devices
           devices = [
             "syncthing.arntanguy.fr"
