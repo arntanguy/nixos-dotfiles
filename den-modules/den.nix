@@ -29,6 +29,7 @@
       den.aspects.office
       den.aspects.communication
       den.aspects.terminal-tools
+      den.aspects.audio
     ];
     # nixos = { pkgs, ... }: { environment.systemPackages = [ pkgs.hello ]; };
     homeManager = { pkgs, ... }: {

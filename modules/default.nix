@@ -34,5 +34,5 @@
   modules.keyboard-mods.enable = lib.mkDefault true;
   modules.nautilus.enable = lib.mkDefault true;
   modules.printing.enable = lib.mkDefault true;
-  modules.audio.enable = lib.mkDefault true;
+  modules.audio.enable = lib.mkDefault false;
 }
