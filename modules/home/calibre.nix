@@ -7,6 +7,6 @@
 {
   programs.calibre = {
     enable = true;
-    plugins = [];
+    plugins = [ ];
   };
 }
