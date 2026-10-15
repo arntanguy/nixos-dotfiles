@@ -16,7 +16,8 @@
   enableBitwarden = true;
   enableWaybar = true;
   enableNiri = true;
-  enableBash = true;
+  enableBash = false;
+  enableFish = true;
   enableZsh = false;
   enableFuzzel = true;
   enableTmux = true;

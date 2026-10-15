@@ -15,6 +15,7 @@
     ++ lib.optional globals.enableNiri ./niri/niri.nix
     ++ [ ./bash.nix ]
     ++ [ ./zsh/zsh.nix ]
+    ++ [ ./fish.nix ]
     ++ lib.optional globals.enableFuzzel ./fuzzel/fuzzel.nix
     ++ lib.optional globals.enableTmux ./tmux.nix
     ++ lib.optional globals.enableKitty ./kitty.nix
