@@ -13,25 +13,6 @@
 
   config = lib.mkMerge [
     {
-      # For Unitree G1, we need to alias the interface name with a label
-      # to differentiate the G1 ip from the others
-      # use <interface-name>:g1 instead of <interface-name>
-      systemd.services.add-g1-alias =
-        let
-          eth = "${globals.EthernetInterface}";
-        in
-        {
-          description = "Add G1 alias IP to ${eth}";
-          after = [ "network-addresses-${eth}.service" ];
-          wants = [ "network-addresses-${eth}.service" ];
-          partOf = [ "network-addresses-${eth}.service" ];
-          wantedBy = [ "multi-user.target" ];
-          serviceConfig.Type = "oneshot";
-          serviceConfig.RemainAfterExit = true;
-          script = ''
-            /run/current-system/sw/bin/ip addr add 192.168.123.${globals.EthernetInterface}/24 dev ${eth} label ${eth}:g1
-          '';
-        };
 
       networking.hosts = {
         "192.168.1.100" = [ "ur10_1" ];
@@ -48,6 +29,25 @@
         macAddr = config.modules.networkmanager.profiles.lirmm-pandas.macAddress;
       in
       {
+        # For Unitree G1, we need to alias the interface name with a label
+        # to differentiate the G1 ip from the others
+        # use <interface-name>:g1 instead of <interface-name>
+        systemd.services.add-g1-alias =
+          let
+            eth = "${globals.EthernetInterface}";
+          in
+          {
+            description = "Add G1 alias IP to ${eth}";
+            after = [ "network-addresses-${eth}.service" ];
+            wants = [ "network-addresses-${eth}.service" ];
+            partOf = [ "network-addresses-${eth}.service" ];
+            wantedBy = [ "multi-user.target" ];
+            serviceConfig.Type = "oneshot";
+            serviceConfig.RemainAfterExit = true;
+            script = ''
+              /run/current-system/sw/bin/ip addr add 192.168.123.${ipSuffixStr}/24 dev ${eth} label ${eth}:g1
+            '';
+          };
         networking = {
           interfaces.${globals.EthernetInterface} = {
             macAddress = lib.mkIf (macAddr != "") macAddr;
