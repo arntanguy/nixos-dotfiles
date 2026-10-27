@@ -7,8 +7,26 @@
 }:
 {
   options = {
-    modules.networkmanager.profiles.common.enable =
-      lib.mkEnableOption "enables networkmanager's profile <common>";
+    modules.networkmanager.profiles.common = {
+      enable = lib.mkEnableOption "enables networkmanager's profile <common>";
+      useDHCP = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Whether to use DHCP for the ethernet interface.";
+      };
+      ipSuffix = lib.mkOption {
+        type = lib.types.int;
+        default = 43;
+        description = "Last octet of the local IP address for panda profile.";
+        example = 99;
+      };
+      macAddress = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Custom MAC address for panda profile (leave empty for default).";
+        example = "00:11:22:33:44:55";
+      };
+    };
   };
 
   config = lib.mkMerge [
@@ -25,8 +43,9 @@
     }
     (lib.mkIf (config.modules.sops.enable && config.modules.networkmanager.profiles.common.enable) (
       let
-        ipSuffixStr = toString config.modules.networkmanager.profiles.lirmm-pandas.ipSuffix;
-        macAddr = config.modules.networkmanager.profiles.lirmm-pandas.macAddress;
+        ipSuffixStr = toString config.modules.networkmanager.profiles.common.ipSuffix;
+        macAddr = config.modules.networkmanager.profiles.common.macAddress;
+        useDHCP = config.modules.networkmanager.profiles.common.useDHCP;
       in
       {
         # For Unitree G1, we need to alias the interface name with a label
@@ -50,8 +69,8 @@
           };
         networking = {
           interfaces.${globals.EthernetInterface} = {
+            inherit useDHCP;
             macAddress = lib.mkIf (macAddr != "") macAddr;
-            useDHCP = false;
             ipv4.addresses = [
               {
                 # UR

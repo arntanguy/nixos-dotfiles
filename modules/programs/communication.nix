@@ -14,7 +14,6 @@
       element-desktop # matrix
       slack
       zoom-us
-      discord
     ];
   };
 }

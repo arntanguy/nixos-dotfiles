@@ -41,6 +41,7 @@
       nix-tree # Interactive visualization of dependency tree
       graphviz
       nix-visualize # generate graphs of dependency trees
+      jrl-cmakemodules
     ];
   };
 }

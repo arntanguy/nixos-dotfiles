@@ -9,7 +9,7 @@
 {
   home.packages = with pkgs; [
     sunsetr
-    noctalia-shell
+    noctalia
   ];
 
   # networking.networkmanager.enable = true;

@@ -143,8 +143,6 @@
     polkit
     qbittorrent
     sqlmap
-    steam
-    steam-run
     wireshark
     wordlists
 
@@ -193,12 +191,6 @@
     xwayland.enable = true;
     wireshark.enable = true;
     firefox.enable = true;
-
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-    };
 
     gamemode.enable = true;
     direnv.enable = true;

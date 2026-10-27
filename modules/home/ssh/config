@@ -3,16 +3,26 @@
 
 AddKeysToAgent yes
 
-# DevPod Start mc-rtc-superbuild-jammy.devpod
-Host mc-rtc-superbuild-jammy.devpod
+# DevPod Start test-mc-rtc-superbuild-noble.devpod
+Host test-mc-rtc-superbuild-noble.devpod
   ForwardAgent yes
   LogLevel error
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
   HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
-  ProxyCommand "/nix/store/z224n0gqnqp69q7kn0gdpks7rhzr5r0a-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-superbuild-jammy --workdir "/home/vscode/superbuild"
+  ProxyCommand "/nix/store/12xnaw28ypbmd8x5slkv6nlr60mscfcf-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode test-mc-rtc-superbuild-noble --workdir "/home/vscode/superbuild"
   User vscode
-# DevPod End mc-rtc-superbuild-jammy.devpod
+# DevPod End test-mc-rtc-superbuild-noble.devpod
+# DevPod Start test-mc-rtc-superbuild-resolute.devpod
+Host test-mc-rtc-superbuild-resolute.devpod
+  ForwardAgent yes
+  LogLevel error
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
+  ProxyCommand "/nix/store/12xnaw28ypbmd8x5slkv6nlr60mscfcf-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode test-mc-rtc-superbuild-resolute --workdir "/home/vscode/superbuild"
+  User vscode
+# DevPod End test-mc-rtc-superbuild-resolute.devpod
 # DevPod Start mc-rtc-superbuild-resolute.devpod
 Host mc-rtc-superbuild-resolute.devpod
   ForwardAgent yes
@@ -20,7 +30,7 @@ Host mc-rtc-superbuild-resolute.devpod
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
   HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
-  ProxyCommand "/nix/store/z224n0gqnqp69q7kn0gdpks7rhzr5r0a-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-superbuild-resolute --workdir "/home/vscode/superbuild"
+  ProxyCommand "/nix/store/12xnaw28ypbmd8x5slkv6nlr60mscfcf-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-superbuild-resolute --workdir "/home/vscode/superbuild"
   User vscode
 # DevPod End mc-rtc-superbuild-resolute.devpod
 # DevPod Start mc-rtc-superbuild-noble.devpod
@@ -30,9 +40,19 @@ Host mc-rtc-superbuild-noble.devpod
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
   HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
-  ProxyCommand "/nix/store/z224n0gqnqp69q7kn0gdpks7rhzr5r0a-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-superbuild-noble --workdir "/home/vscode/superbuild"
+  ProxyCommand "/nix/store/12xnaw28ypbmd8x5slkv6nlr60mscfcf-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-superbuild-noble --workdir "/home/vscode/superbuild"
   User vscode
 # DevPod End mc-rtc-superbuild-noble.devpod
+# DevPod Start mc-rtc-superbuild-jammy.devpod
+Host mc-rtc-superbuild-jammy.devpod
+  ForwardAgent yes
+  LogLevel error
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
+  ProxyCommand "/nix/store/12xnaw28ypbmd8x5slkv6nlr60mscfcf-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-superbuild-jammy --workdir "/home/vscode/superbuild"
+  User vscode
+# DevPod End mc-rtc-superbuild-jammy.devpod
 # DevPod Start mc-rtc-pid-jammy.devpod
 Host mc-rtc-pid-jammy.devpod
   ForwardAgent yes
@@ -40,7 +60,7 @@ Host mc-rtc-pid-jammy.devpod
   StrictHostKeyChecking no
   UserKnownHostsFile /dev/null
   HostKeyAlgorithms rsa-sha2-256,rsa-sha2-512,ssh-rsa
-  ProxyCommand "/nix/store/z224n0gqnqp69q7kn0gdpks7rhzr5r0a-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-pid-jammy --workdir "/home/vscode/superbuild"
+  ProxyCommand "/nix/store/12xnaw28ypbmd8x5slkv6nlr60mscfcf-devpod-0.6.15/bin/devpod" ssh --stdio --context default --user vscode mc-rtc-pid-jammy --workdir "/home/vscode/superbuild"
   User vscode
 # DevPod End mc-rtc-pid-jammy.devpod
 # DevPod Start panda-prosthesis-superbuild.devpod
@@ -60,3 +80,14 @@ Host arntanguy.fr
   User ubuntu
   # Force SSH to use the agent and ignore the file system
   IdentitiesOnly yes
+  # Syncthing port forwarding
+  # On the arntanguy.fr server syncthing gui is bound to 127.0.0.1:8384
+  # We bind the local port 8384 to it through ssh-forwarding
+  # Do not expose port 8384 on the server
+  LocalForward 8384 127.0.0.1:8384
+
+Host rhps1
+  User rhps1user
+
+Host ar-rob-xmg.local
+  User rolkneematics

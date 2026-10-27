@@ -11,7 +11,8 @@
     };
 
     nvim-wrapper = {
-      url = "github:arntanguy/nvim-wrapper";
+      #url = "github:arntanguy/nvim-wrapper";
+      url = "path:/home/arnaud/devel/nvim-wrapper";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -77,10 +78,28 @@
         modules = [
           # Native nixpkgs configuration block for this host evaluation tree
           {
-            nixpkgs.config.allowUnfree = true;
+            # nixpkgs.config.allowUnfree = true;
+            nixpkgs.config.allowUnfreePredicate =
+              pkg:
+              builtins.elem (nixpkgs.lib.getName pkg) [
+                "copilot-language-server"
+                "github-copilot-cli"
+                "vscode"
+                "nvidia-x11"
+                "nvidia-settings"
+                "nvidia-kernel-modules"
+                "nvidia-kernel-modules-595.104.02-6.18.58"
+                "firefox-esr-140-bin-unwrapped"
+                "davinci-resolve"
+                "slack"
+                "zoom"
+                "obsidian"
+              ];
             nixpkgs.config.permittedInsecurePackages = [
               "libsoup-2.74.3"
               "electron-39.8.10"
+              "firefox-esr-140-bin-unwrapped-140.17.0esr" # since 27/10/2026, why?
+              "copilot-language-server"
             ];
             nixpkgs.overlays = overlays;
           }
