@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    ./advertise-hostnames.nix
     ./laptop.nix
     ./yubikey.nix
     ./sops.nix
