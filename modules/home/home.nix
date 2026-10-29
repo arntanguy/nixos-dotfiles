@@ -11,24 +11,24 @@
 
   imports =
     [ ]
-    ++ lib.optional globals.enableWaybar ./waybar/waybar.nix
-    ++ lib.optional globals.enableNiri ./niri/niri.nix
-    ++ lib.optional globals.enableBash ./bash.nix
-    ++ lib.optional globals.enableZsh ./zsh/zsh.nix
-    ++ lib.optional globals.enableFish ./fish.nix
-    ++ lib.optional globals.enableFuzzel ./fuzzel/fuzzel.nix
+    ++ lib.optional globals.enableWaybar ./waybar/waybar.nix # den: using noctalia now, dropping
+    ++ lib.optional globals.enableNiri ./niri/niri.nix # den: moved
+    ++ lib.optional globals.enableBash ./bash.nix # den: using fish, dropping (or we should provide a simple default)
+    ++ lib.optional globals.enableZsh ./zsh/zsh.nix # den: using fish, dropping
+    ++ lib.optional globals.enableFish ./fish.nix # den: moved
+    ++ lib.optional globals.enableFuzzel ./fuzzel/fuzzel.nix # den: moved
     ++ lib.optional globals.enableTmux ./tmux.nix
-    ++ lib.optional globals.enableKitty ./kitty.nix
-    ++ lib.optional globals.enableGit ./git.nix
-    ++ lib.optional globals.enableGit ./lazygit/lazygit.nix
+    ++ lib.optional globals.enableKitty ./kitty.nix # den: moved
+    ++ lib.optional globals.enableGit ./git.nix # den: moved
+    ++ lib.optional globals.enableGit ./lazygit/lazygit.nix # den: moved
     ++ lib.optional globals.enableScripts ./scripts/scripts.nix
     ++ lib.optional globals.enableNvidia ./nvidia.nix
     ++ lib.optional globals.enableSsh ./ssh/ssh.nix
     ++ lib.optional globals.enableEmail ./email.nix
-    ++ lib.optional globals.enableBitwarden ./bw.nix
-    ++ lib.optional globals.enableAudioEditing ./audio.nix
-    ++ lib.optional globals.enableZotero ./zotero.nix
-    ++ lib.optional globals.enableCalibre ./calibre.nix;
+    ++ lib.optional globals.enableBitwarden ./bw.nix # den: moved
+    ++ lib.optional globals.enableAudioEditing ./audio.nix # den: moved
+    ++ lib.optional globals.enableZotero ./zotero.nix # den: moved
+    ++ lib.optional globals.enableCalibre ./calibre.nix; # den: moved
   # ++ lib.optional globals.enableDavinciResolve ./davinci-resolve.nix;
 
   dconf.settings = {

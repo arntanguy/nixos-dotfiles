@@ -98,7 +98,7 @@
             nixpkgs.config.permittedInsecurePackages = [
               "libsoup-2.74.3"
               "electron-39.8.10"
-              "firefox-esr-140-bin-unwrapped-140.17.0esr" # since 27/10/2026, why?
+              "firefox-esr-140-bin-unwrapped-140.17.0esr" # since 27/10/2026, why? -> zotero
               "copilot-language-server"
             ];
             nixpkgs.overlays = overlays;

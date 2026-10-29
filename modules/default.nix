@@ -23,19 +23,19 @@
     ./syncthing.nix
   ];
 
-  modules.zsh.enable = lib.mkDefault false;
-  modules.fish.enable = lib.mkDefault true;
-  modules.bash.enable = lib.mkDefault false;
+  modules.zsh.enable = lib.mkDefault false; # den: ignored
+  modules.fish.enable = lib.mkDefault true; # den: moved
+  modules.bash.enable = lib.mkDefault false; # den: ignored
   modules.laptop.enable = lib.mkDefault true;
   modules.ccache.enable = lib.mkDefault true;
-  modules.yubikey.enable = lib.mkDefault true;
+  modules.yubikey.enable = lib.mkDefault true; # den: moved, improved
   # Disabling sops will make some other features such as some modules.networkmanager.profiles unavailable
-  modules.sops.enable = lib.mkDefault true;
-  modules.syncthing.enable = lib.mkDefault false;
-  modules.networkmanager.enable = lib.mkDefault true;
+  modules.sops.enable = lib.mkDefault true; # den: moved, improved
+  modules.syncthing.enable = lib.mkDefault false; # den: moved, improved (reproducible ids, local hostnames)
+  modules.networkmanager.enable = lib.mkDefault true; # den: done (but sops bug for multiple users)
   # Enable home-row mods by default
-  modules.keyboard-mods.enable = lib.mkDefault true;
-  modules.nautilus.enable = lib.mkDefault true;
-  modules.printing.enable = lib.mkDefault true;
-  modules.audio.enable = lib.mkDefault true;
+  modules.keyboard-mods.enable = lib.mkDefault true; # den: ignored for now, this does not work so well here
+  modules.nautilus.enable = lib.mkDefault true; # den: moved
+  modules.printing.enable = lib.mkDefault true; # den: moved
+  modules.audio.enable = lib.mkDefault true; # den: moved
 }

@@ -98,6 +98,8 @@
               environmentFiles = [
                 config.sops.secrets."data/networking/wifi/LIRMM".path
                 config.sops.secrets."data/networking/wifi/EDUROAM".path
+                config.sops.secrets."data/networking/wifi/HOME_BREST".path
+                config.sops.secrets."data/networking/wifi/ARNAUD_ANDROID_AP".path
               ];
               profiles = {
                 home_brest = {
