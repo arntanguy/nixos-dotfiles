@@ -5,7 +5,7 @@ defaults
 // {
   # this are the variables that you wanna change xd
   UserName = "arnaud";
-  HostName = "arnaud";
+  HostName = "ardell";
   GitName = "Arnaud TANGUY";
   GitEmail = "arn.tanguy@gmail.com";
   Bwserver = "https://vault.arntanguy.fr";
