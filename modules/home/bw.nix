@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    rbw
     rofi-rbw-wayland
   ];
   programs.rbw = {

@@ -22,6 +22,7 @@
 
   # FIXME: override default mac address with a recognized one
   # modules.networkmanager.profiles.lirmm-pandas.macAddress = "34:48:ed:7e:e4:70";
+  modules.networkmanager.profiles.common.macAddress = "34:5a:60:9f:e4:97";
   modules.syncthing.enable = true;
 
   nix = {
@@ -30,7 +31,7 @@
     settings = {
       trusted-users = [
         "root"
-        "${globals.UserName}"
+        # "${globals.UserName}"
       ];
 
       substituters = [
@@ -155,8 +156,6 @@
     polkit
     qbittorrent
     sqlmap
-    steam
-    steam-run
     wireshark
     wordlists
 
@@ -205,12 +204,6 @@
     xwayland.enable = true;
     wireshark.enable = true;
     firefox.enable = true;
-
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-    };
 
     gamemode.enable = true;
     direnv.enable = true;

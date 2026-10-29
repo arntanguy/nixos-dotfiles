@@ -10,6 +10,7 @@
       enable = true;
       interactiveShellInit = ''
         set -x CMAKE_CXX_COMPILER_LAUNCHER ccache
+        set -x EDITOR nvim
       '';
       functions = {
         nurl-aist = ''

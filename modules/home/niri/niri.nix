@@ -366,7 +366,7 @@
 
 
     // This line starts waybar, a commonly used bar for Wayland compositors.
-    spawn-at-startup "noctalia-shell"
+    spawn-at-startup "noctalia"
     // spawn-at-startup "bitwarden"
     spawn-sh-at-startup "waypaper --random"
     // spawn-at-startup "obs"
@@ -387,7 +387,7 @@
         Mod+Shift+O hotkey-overlay-title="toggle opacity" { toggle-window-rule-opacity; }
 
         // Mod+W hotkey-overlay-title="toggle waybar" repeat=false { spawn-sh "pkill -SIGUSR1 waybar || waybar"; }
-        // Mod+W hotkey-overlay-title="toggle noctalia-shell" repeat=false { spawn-sh "pkill -SIGUSR1 noctalia-shell || noctalia-shell"; }
+        // Mod+W hotkey-overlay-title="toggle noctalia" repeat=false { spawn-sh "pkill -SIGUSR1 noctalia || noctalia"; }
 
         // Suggested binds for running programs: terminal, app launcher, screen locker.
         Mod+Return hotkey-overlay-title="Open a Terminal " { spawn "${toString globals.terminal}"; }
@@ -397,21 +397,20 @@
         Super+Shift+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn-sh "swaylock -f -S --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color bb00cc --key-hl-color 880033 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --fade-in 0.2"; }
 
         /* Noctalia shell */
-        Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "noctalia-shell ipc call launcher toggle"; }
-        Mod+S { spawn-sh "noctalia-shell ipc call controlCenter toggle"; }
-        Mod+Comma { spawn-sh "noctalia-shell ipc call settings toggle"; }
+        Mod+D hotkey-overlay-title="Run an Application" { spawn-sh "noctalia msg panel-toggle launcher"; }
+        Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
 
         ${lib.optionalString globals.enableBitwarden ''
           Mod+P hotkey-overlay-title="Copy Bitwarden Pwd" { spawn-sh "rofi-rbw -a copy --clipboarder wl-copy -t password -r 'Copy pwd: '"; }
         ''}
 
         // Audio & Brightness
-        XF86AudioRaiseVolume { spawn-sh "noctalia-shell ipc call volume increase"; }
-        XF86AudioLowerVolume { spawn-sh "noctalia-shell ipc call volume decrease"; }
-        XF86AudioMute { spawn-sh "noctalia-shell ipc call volume muteOutput"; }
-        XF86MonBrightnessUp { spawn-sh "noctalia-shell ipc call brightness increase"; }
-        XF86MonBrightnessDown { spawn-sh "noctalia-shell ipc call brightness decrease"; }
-        /* End noctalia-shell */
+        XF86AudioRaiseVolume { spawn-sh "noctalia msg volume-up"; }
+        XF86AudioLowerVolume { spawn-sh "noctalia msg volume-down"; }
+        XF86AudioMute { spawn-sh "noctalia msg volume-mute"; }
+        XF86MonBrightnessUp { spawn-sh "noctalia msg brightness-up"; }
+        XF86MonBrightnessDown { spawn-sh "noctalia msg brightness-down"; }
+        /* End noctalia */
 
 
 

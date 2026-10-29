@@ -11,6 +11,7 @@
   };
 
   config = lib.mkIf config.modules.programs.devtools.enable {
+    environment.variables.EDITOR = "nvim";
     environment.systemPackages = with pkgs; [
       # Development Tools
       cmakeCurses
@@ -19,6 +20,8 @@
       gh # github cli
       gh-f # gh cli fzf extension
       github-copilot-cli # agentic cli
+      act # run github actions in docker locally
+      act3 # glance at the last 3 run of a repo's github-actions
       git
       gnumake
       go
