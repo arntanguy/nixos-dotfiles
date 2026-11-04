@@ -4,6 +4,7 @@
     enable = true;
 
     settings = {
+      clipboard_control = "clipboard_control write-clipboard write-primary read-clipboard read-primary";
       background_opacity = "0.76";
       draw_minimal_borders = "yes";
       window_padding_width = "2";
