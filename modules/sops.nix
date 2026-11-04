@@ -23,6 +23,8 @@
       secrets = {
         "data/networking/wifi/LIRMM" = { };
         "data/networking/wifi/EDUROAM" = { };
+        "data/networking/wifi/HOME_BREST" = { };
+        "data/networking/wifi/ARNAUD_ANDROID_AP" = { };
         # XXX: Needed to enable nix build to fetch private repositories
         "data/github/NIX_GH_REPO_TOKEN" = { };
         "data/syncthing/${globals.UserName}/password" = { };
