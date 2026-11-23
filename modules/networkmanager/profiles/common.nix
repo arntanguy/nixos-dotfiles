@@ -99,6 +99,7 @@
                 config.sops.secrets."data/networking/wifi/LIRMM".path
                 config.sops.secrets."data/networking/wifi/EDUROAM".path
                 config.sops.secrets."data/networking/wifi/HOME_BREST".path
+                config.sops.secrets."data/networking/wifi/HOME_MONTPELLIER".path
                 config.sops.secrets."data/networking/wifi/ARNAUD_ANDROID_AP".path
               ];
               profiles = {
@@ -116,6 +117,31 @@
                   wifi-security = {
                     key-mgmt = "wpa-psk";
                     psk = "$HOME_BREST_PASSWORD";
+                  };
+                };
+                home_montpellier = {
+                  connection = {
+                    id = "home_montpellier";
+                    type = "wifi";
+                    autoconnect = true;
+                    autoconnect-priority = 100; # Higher number wins
+                  };
+                  wifi = {
+                    mode = "infrastructure";
+                    ssid = "Livebox-98F0";
+                    uuid = "5ad7d1c8-61b1-4409-b85b-ca1a42dbbd45";
+                  };
+                  wifi-security = {
+                    auth-alg = "open";
+                    key-mgmt = "wpa-psk";
+                    psk = "$HOME_MONTPELLIER_PASSWORD";
+                  };
+                  ipv4 = {
+                    method = "auto";  # Added IPv4 method
+                  };
+                  ipv6 = {
+                    addr-gen-mode = "default";  # Added IPv6 address generation mode
+                    method = "auto";  # Added IPv6 method
                   };
                 };
                 LIRMM = {
