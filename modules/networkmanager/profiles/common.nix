@@ -137,11 +137,11 @@
                     psk = "$HOME_MONTPELLIER_PASSWORD";
                   };
                   ipv4 = {
-                    method = "auto";  # Added IPv4 method
+                    method = "auto"; # Added IPv4 method
                   };
                   ipv6 = {
-                    addr-gen-mode = "default";  # Added IPv6 address generation mode
-                    method = "auto";  # Added IPv6 method
+                    addr-gen-mode = "default"; # Added IPv6 address generation mode
+                    method = "auto"; # Added IPv6 method
                   };
                 };
                 LIRMM = {

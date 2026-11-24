@@ -11,7 +11,6 @@
   osConfig,
   ...
 }:
-
 let
   # 1. System-level detection
   # Check multiple potential locations for Nvidia activation
@@ -57,6 +56,7 @@ let
 
 in
 {
+  home.sessionVariables = lib.mkIf isNvidiaSystem nvidiaEnv;
   home.packages = [
     # Install the standalone utility
     nv-run

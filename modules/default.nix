@@ -21,6 +21,8 @@
     ./bash.nix
     ./audio.nix
     ./syncthing.nix
+    ./nvidia.nix
+    ./nvidia-offload.nix
   ];
 
   modules.zsh.enable = lib.mkDefault false; # den: ignored
@@ -38,4 +40,6 @@
   modules.nautilus.enable = lib.mkDefault true; # den: moved
   modules.printing.enable = lib.mkDefault true; # den: moved
   modules.audio.enable = lib.mkDefault true; # den: moved
+  modules.nvidia-offload.enable = lib.mkDefault true;
+  modules.nvidia.enable = lib.mkDefault false;
 }

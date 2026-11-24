@@ -178,10 +178,6 @@
 
   hardware = {
     graphics.enable = true;
-    nvidia = {
-      modesetting.enable = true;
-      open = false;
-    };
     bluetooth.enable = true;
   };
   services.xserver.videoDrivers = [ "nvidia" ];
