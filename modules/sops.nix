@@ -29,6 +29,7 @@
         # XXX: Needed to enable nix build to fetch private repositories
         "data/github/NIX_GH_REPO_TOKEN" = { };
         "data/syncthing/${globals.UserName}/password" = { };
+        "data/attic/mc-rtc-nix-private" = { };
       };
     };
 
@@ -36,8 +37,9 @@
     # from within nix sandbox
     sops.templates.netrc = {
       content = ''
-        machine github.com
-            password ${config.sops.placeholder."data/github/NIX_GH_REPO_TOKEN"}
+        machine attic.arntanguy.fr
+            login mc-rtc-nix-private
+            password ${config.sops.placeholder."data/attic/mc-rtc-nix-private"}
       '';
       mode = "0400";
       path = "/etc/nix/netrc";
